@@ -5,6 +5,11 @@ import BasePage from './basePage';
 
 
 class NavHeader extends BasePage{
+
+    get homeBtn () {
+        return $('#logo');
+    }
+
     get homeHeader () {
         return $('#menu-item-home');
     }
@@ -16,6 +21,8 @@ class NavHeader extends BasePage{
     get readCogHeader () {
         return $('menu-item-read-the-cognitive-realm');
     }
+
+
   
 
     async menuHeadersOpen () {
