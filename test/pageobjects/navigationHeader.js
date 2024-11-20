@@ -18,8 +18,10 @@ export default class NavHeader extends BasePage{
     }
   
 
-    async menuHeaders () {
+    async menuHeadersOpen () {
         await this.openBasePage();
+        await this.catalogHeader.click();
+        await expect(browser.url('https://www.dragonsteelbooks.com/collections/all'));
     }
     
 }
