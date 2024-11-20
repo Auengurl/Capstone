@@ -4,22 +4,22 @@ import BasePage from './basePage';
 
 
 
-export default class NavHeader extends BasePage{
+export default class NavHeader {
     get homeHeader () {
-        return $('a[href="/search/Appliances"]');
+        return $('#menu-item-home');
     }
 
     get catalogHeader () {
-        return $('a[href="/search/Electronics"]');
+        return $('#menu-item-catalog');
     }
 
     get readCogHeader () {
-        return $('a[href="/search/Furniture"]');
+        return $('menu-item-read-the-cognitive-realm');
     }
   
 
     async menuHeadersOpen () {
-        await this.openBasePage();
+        await BasePage.openBasePage();
         await this.catalogHeader.click();
         await expect(browser.url('https://www.dragonsteelbooks.com/collections/all'));
     }
