@@ -4,7 +4,7 @@ import BasePage from './basePage';
 
 
 
-export default class NavHeader {
+class NavHeader extends BasePage{
     get homeHeader () {
         return $('#menu-item-home');
     }
@@ -19,10 +19,11 @@ export default class NavHeader {
   
 
     async menuHeadersOpen () {
-        await BasePage.openBasePage();
+        await this.openBasePage();
         await this.catalogHeader.click();
         await expect(browser.url('https://www.dragonsteelbooks.com/collections/all'));
     }
     
 }
 
+export default new NavHeader();
