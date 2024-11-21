@@ -6,31 +6,34 @@ import BasePage from './basePage';
 
 class NavHeader extends BasePage{
 
-    get homeBtn () {
+    get homeLogoBtn () {
         return $('#logo');
     }
 
-    get homeHeader () {
+    get homeHeaderLink () {
         return $('#menu-item-home');
     }
 
-    get catalogHeader () {
+    get catalogHeaderLink () {
         return $('#menu-item-catalog');
     }
 
-    get readCogHeader () {
-        return $('menu-item-read-the-cognitive-realm');
+    get realmCogHeaderLink () {
+        return $('li[id="menu-item-read-the-cognitive-realm"]');
     }
 
-
-  
-
-    async menuHeadersOpen () {
-        await this.openBasePage();
-        await this.catalogHeader.click();
-        await expect(browser.url('https://www.dragonsteelbooks.com/collections/all'));
-    }
     
+    async homePageOpen () {
+        await this.openPage(this.homeHeaderLink, 'https://www.dragonsteelbooks.com/');
+    }
+
+    async catalogPageOpen() {
+        await this.openPage(this.catalogHeaderLink, 'https://www.dragonsteelbooks.com/collections/all');
+    }
+
+    async realmCogPageOpen () {
+        await this.openPage(this.realmCogHeaderLink, 'https://www.dragonsteelbooks.com/blogs/the-cognitive-realm');
+    }
 }
 
 export default new NavHeader();
