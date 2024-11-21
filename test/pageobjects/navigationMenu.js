@@ -1,7 +1,5 @@
-import { browser } from '@wdio/globals';
 import { $ } from '@wdio/globals';
 import BasePage from './basePage';
-
 
 
 class NavHeader extends BasePage{

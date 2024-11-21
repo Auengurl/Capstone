@@ -6,7 +6,6 @@ export default class BasePage {
         return browser.url(`https://www.dragonsteelbooks.com/`);
     }
 
-    
 
     async openPage(headerLink, expectedUrl) {
         await this.openBasePage(); 
