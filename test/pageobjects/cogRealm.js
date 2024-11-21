@@ -15,9 +15,8 @@ class BlogCogRealm {
         const buttons = await this.allTagBtns;
 
         for (const btn of buttons) { 
-            await btn.waitForClickable({ timeout: 5000 }); 
+            await btn.waitForClickable({ timeout: 3000 }); 
             await btn.click(); 
-            await browser.pause(1000); 
         }
     }
 }
