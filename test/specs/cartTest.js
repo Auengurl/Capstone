@@ -1,18 +1,16 @@
 
-// import CartArea from '../pageobjects/cart.js';
-// import HamburgerMenu from '../pageobjects/hamburgerMenu.js';
+import CartArea from '../pageobjects/cart.js';
 
 
+describe('cart page and components', () => {
+    it('cart page opens from cart icon on all pages', async () => {
+        
+        await CartArea.cartOpenOnAllPages();
+    })
 
-// describe('cart page and components', () => {
-//     it('cart page opens from cart icon on inventory page', async () => {
-//         await CartArea.accessInventoryPage();
-//         await CartArea.cartOpen();
-//     })
-
-//     it('add item to cart shows in cart icon', async () => {    
-//         await CartArea.addItemToCart();
-//     })
+    // it('add item to cart shows in cart icon', async () => {    
+    //     await CartArea.addItemToCart();
+    // })
 
 //     it('add multiple items to the chart to see if the icon changes', async () => {
 //         await CartArea.accessInventoryPage();
@@ -60,7 +58,7 @@
 
    
 
-// })
+})
 
 
 
