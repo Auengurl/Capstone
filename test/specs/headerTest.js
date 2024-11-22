@@ -13,6 +13,10 @@ describe('navigation headers', () => {
             await NavHeader.catalogPageOpen();
         });
 
+        it('open catalog menu and select one category', async () => {
+            await NavHeader.selectCategoryMenu();
+        })
+
         it('open realm blog page', async () => {
             await NavHeader.realmCogPageOpen();
  

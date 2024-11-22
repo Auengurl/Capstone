@@ -1,4 +1,4 @@
-import { $ } from '@wdio/globals';
+import { $, browser } from '@wdio/globals';
 import BasePage from './basePage';
 
 
@@ -20,6 +20,14 @@ class NavHeader extends BasePage{
         return $('li[id="menu-item-read-the-cognitive-realm"]');
     }
 
+    get categoriesMenu() {
+        return $('.babymenu')
+    }
+    get category () {
+        return $('');
+
+    }
+
     
     async homePageOpen () {
         await this.openPage(this.homeHeaderLink, 'https://www.dragonsteelbooks.com/');
@@ -31,6 +39,14 @@ class NavHeader extends BasePage{
 
     async realmCogPageOpen () {
         await this.openPage(this.realmCogHeaderLink, 'https://www.dragonsteelbooks.com/blogs/the-cognitive-realm');
+    }
+
+    async selectCategoryMenu () {
+        await this.catalogHeaderLink.click();
+        await this.categoriesMenu.click();
+        await this.category.click();
+        await browser.pause(3000);
+
     }
 }
 
