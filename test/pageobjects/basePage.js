@@ -20,6 +20,8 @@ export default class BasePage {
     async headerSelector () {
         await  expect(this.selectorDetector());
     }
+
+
 }
 
 

@@ -1,5 +1,6 @@
 import { $, browser } from '@wdio/globals';
 
+import BasePage from './basePage.js';
 import NavHeader from './navigationMenu.js';
 
 
@@ -29,6 +30,16 @@ class CartArea {
         await expect(this.cartSidebarMenu);
         
     }
+//     async cartOpenOnPages () {
+
+//         await BasePage.o();
+//         const items = this.addMultipleItems;
+//             for (const item of items) {
+//             await item.click();
+// }
+//         await expect(this.shoppingCartBtn).toBeDisplayed();
+        
+//     }
 
     async cartOpenOnAllPages () {
         await NavHeader.catalogPageOpen();
@@ -40,6 +51,26 @@ class CartArea {
         await browser.pause(3000);
 
     }
+
+    // async openCartOnPages(pages) {
+    //     for (const pageOpenFunc of pages) {
+    //         await pageOpenFunc(); // Navigate to the page
+    //         await this.cartOpen(); // Open the cart
+    //     }
+    //     await browser.pause(3000); // Optional: Pause after all actions
+    // }
+    
+    // async cartOpenOnAllPages () {
+    //     const pages = [
+    //         NavHeader.catalogPageOpen,
+    //         NavHeader.homePageOpen,
+    //         NavHeader.realmCogPageOpen
+    //     ];
+    //     await this.openCartOnPages(pages);
+    // }
+    
+
+    
 
     async addItemToCart () {
 
