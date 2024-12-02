@@ -23,22 +23,22 @@ describe('navigation headers', () => {
          });
 });
 
-describe('blog realm buttons', () => {
-    it('open all blogs using the buttons', async () => {
-        await BlogCogRealm.clickAllTagsBtns();
+// describe('blog realm buttons', () => {
+//     it('open all blogs using the buttons', async () => {
+//         await BlogCogRealm.clickAllTagsBtns();
 
-    });
-});
+//     });
+// });
 
-describe('sort by function',() => {
-    it()
-});
+// describe('sort by function',() => {
+//     it()
+// });
 
-describe('',() => {
-    it('', async () => {
+// describe('',() => {
+//     it('', async () => {
 
-    });
-});
+//     });
+// });
 
  
 

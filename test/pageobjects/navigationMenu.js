@@ -62,14 +62,19 @@ class NavHeader extends BasePage{
     await catalogMenu.moveTo();
 
     // Wait for the "All Products" submenu to appear
-    const allProductsMenu = await $('a[href="/collections/all"]');
-    await allProductsMenu.waitForDisplayed();
+    const allProducts = await $('a[href="/collections/all"]');
+    await allProducts.waitForDisplayed();
+    await allProducts.moveTo();
+    
 
     // Hover over the "All Products" submenu to open its dropdown
-    await allProductsMenu.moveTo();
+  
+
+    // const allProductsDisplayed = await $('#SiteNavLabel-all-products-classic');
+    // await allProductsDisplayed.waitForDisplayed();
 
     // Wait for the "Leatherbound Books" menu item to appear
-    const leatherboundBooksMenu = await $('a[href="/collections/leatherbound-books"]');
+    const leatherboundBooksMenu = await $('#SiteNavLabel-all-products-classic');
     await leatherboundBooksMenu.waitForDisplayed();
 
     // Click on the "Leatherbound Books" menu item
