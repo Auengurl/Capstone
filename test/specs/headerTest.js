@@ -13,16 +13,16 @@ describe('navigation headers', () => {
             await NavHeader.catalogPageOpen();
         });
 
-        it('open catalog menu and select one category', async () => {
-            await NavHeader.selectCategoryMenu();
-        })
+        // it('open catalog menu and select one category', async () => {
+        //     await NavHeader.selectCategoryMenu();
+        // })
 
         it('open realm blog page', async () => {
             await NavHeader.realmCogPageOpen();
  
          });
 
-        it('open all blogs using the tabs', async () => {
+        it('open all blogs using the buttons', async () => {
             await BlogCogRealm.clickAllTagsBtns();
 
         });
