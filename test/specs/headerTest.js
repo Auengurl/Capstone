@@ -13,22 +13,32 @@ describe('navigation headers', () => {
             await NavHeader.catalogPageOpen();
         });
 
-        // it('open catalog menu and select one category', async () => {
-        //     await NavHeader.selectCategoryMenu();
-        // })
+        it('open catalog menu and select one category', async () => {
+            await NavHeader.subMenuOpen();
+        })
 
         it('open realm blog page', async () => {
             await NavHeader.realmCogPageOpen();
  
          });
+});
 
-        it('open all blogs using the buttons', async () => {
-            await BlogCogRealm.clickAllTagsBtns();
+describe('blog realm buttons', () => {
+    it('open all blogs using the buttons', async () => {
+        await BlogCogRealm.clickAllTagsBtns();
 
-        });
+    });
+});
 
-     });
+describe('sort by function',() => {
+    it()
+});
 
+describe('',() => {
+    it('', async () => {
+
+    });
+});
 
  
 
