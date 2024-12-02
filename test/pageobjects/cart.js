@@ -22,6 +22,13 @@ class CartArea {
         return $('button[class="sidebar__close"]')
     }
 
+    get productItem() {
+        return $('a[href="/collections/all/products/adolin-character-pin-series-2-013"]')
+    }
+
+    get addItemCartBtn () {
+        return $('button[name="add"]')
+    }
     
 
     async cartOpen () {
@@ -73,6 +80,12 @@ class CartArea {
     
 
     async addItemToCart () {
+        await NavHeader.catalogPageOpen();
+        await this.productItem.click();
+        await expect(browser.url('https://www.dragonsteelbooks.com/collections/all/products/adolin-character-pin-series-2-013'));
+        await this.addItemCartBtn.click();
+        await this.cartOpen();
+
 
     }
 

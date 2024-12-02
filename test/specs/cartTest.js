@@ -8,9 +8,9 @@ describe('cart page and components', () => {
         await CartArea.cartOpenOnAllPages();
     })
 
-    // it('add item to cart shows in cart icon', async () => {    
-    //     await CartArea.addItemToCart();
-    // })
+    it('add item to cart shows in cart', async () => {    
+        await CartArea.addItemToCart();
+    })
 
 //     it('add multiple items to the chart to see if the icon changes', async () => {
 //         await CartArea.accessInventoryPage();
