@@ -95,6 +95,8 @@ class NavHeader extends BasePage{
         await allProducts.moveTo();
 
         await browser.pause(3000);
+
+
     }
 
     async selectProductSubMenuOpen() {
