@@ -85,6 +85,7 @@ class CartArea {
         await expect(browser.url('https://www.dragonsteelbooks.com/collections/all/products/adolin-character-pin-series-2-013'));
         await this.addItemCartBtn.click();
         await this.cartOpen();
+        await browser.pause(3000);
 
 
     }

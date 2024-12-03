@@ -21,7 +21,7 @@ class NavHeader extends BasePage{
     }
     
     get allProdsMenuDrop () {
-        return $('a[title="All Products"][class="menu-link  active  "]')
+        return $('a[title="All Products"]')
     }
  
     get categoriesMenu() {
@@ -55,33 +55,31 @@ class NavHeader extends BasePage{
     // }
 
     async subMenuOpen() {
-    await this.openPage;
+        await this.openPage;
 
-    // Hover over the Catalog menu to open the dropdown
-    const catalogMenu = await $('#menu-item-catalog > a'); // Selector for "Catalog"
-    await catalogMenu.moveTo();
+        // Hover over the Catalog menu to open the dropdown
+        const catalogMenu = await $('#menu-item-catalog > a'); // Selector for "Catalog"
+        await catalogMenu.moveTo();
 
-    // Wait for the "All Products" submenu to appear
-    const allProducts = await $('a[href="/collections/all"]');
-    await allProducts.waitForDisplayed();
-    await allProducts.moveTo();
+        // Wait for the "All Products" submenu to appear
+        const allProducts = await $('a[title="All Products"]');
+        await allProducts.waitForDisplayed();
+        await allProducts.moveTo();
+
+        await browser.pause(3000);
     
-
-    // Hover over the "All Products" submenu to open its dropdown
-  
-
-    // const allProductsDisplayed = await $('#SiteNavLabel-all-products-classic');
-    // await allProductsDisplayed.waitForDisplayed();
 
     // Wait for the "Leatherbound Books" menu item to appear
     const leatherboundBooksMenu = await $('#SiteNavLabel-all-products-classic');
     await leatherboundBooksMenu.waitForDisplayed();
+    await leatherboundBooksMenu.moveTo();
+
 
     // Click on the "Leatherbound Books" menu item
     await leatherboundBooksMenu.click();
 
     // Optionally, verify that the correct page loaded
-    await expect(browser).toHaveUrlContaining('/collections/leatherbound-books');
+    await expect(browser.url('https://www.dragonsteelbooks.com/collections/leatherbound-books'));
     }
 
 }

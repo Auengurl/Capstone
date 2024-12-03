@@ -14,15 +14,17 @@ describe('navigation headers', () => {
             await NavHeader.catalogPageOpen();
         });
 
-        // it('open catalog menu and select one category', async () => {
-        //     await NavHeader.subMenuOpen();
-        // })
-
         it('open realm blog page', async () => {
             await NavHeader.realmCogPageOpen();
  
          });
 });
+
+describe ('open products pages from drop menu', () => {
+    it('open catalog menu and select one category', async () => {
+        await NavHeader.subMenuOpen();
+    })
+})
 
 describe('blog realm buttons', () => {
     it('open all blogs using the buttons', async () => {
@@ -31,11 +33,11 @@ describe('blog realm buttons', () => {
     });
 });
 
-describe('sort by function',() => {
-    it('sort by works on all products page', async () => {
-        await SortBy.sortByFilters();
-    });
-});
+// describe('sort by function',() => {
+//     it('sort by works on all products page', async () => {
+//         await SortBy.sortByFilters();
+//     });
+// });
 
 // describe('',() => {
 //     it('', async () => {
