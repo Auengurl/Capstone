@@ -11,6 +11,7 @@ class BlogCogRealm {
 
     async clickAllTagsBtns() {
         await NavHeader.realmCogPageOpen();
+        await expect(browser.url('https://www.dragonsteelbooks.com/blogs/the-cognitive-realm'))
 
         const buttons = await this.allTagBtns;
 
