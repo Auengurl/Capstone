@@ -11,7 +11,10 @@ import NavHeader from './navigationMenu';
     async sortByFilters () {
         await this.openPage();
         await NavHeader.catalogPageOpen();
-        await this.sortByTable.click();
+
+        const sortMenu = await $('select[id="desktop-SortBy"]');
+        await sortMenu.moveTo();
+        await sortMenu.click();
 
     }
  }

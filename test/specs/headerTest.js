@@ -39,11 +39,11 @@ describe ('open products pages from drop menu', () => {
 
 
 
-// describe('sort by function',() => {
-//     it('sort by works on all products page', async () => {
-//         await SortBy.sortByFilters();
-//     });
-// });
+describe('sort by function',() => {
+    it('sort by works on all products page', async () => {
+        await SortBy.sortByFilters();
+    });
+});
 
 // describe('',() => {
 //     it('', async () => {
