@@ -21,7 +21,7 @@ class NavHeader extends BasePage{
     }
     
     get menuItems () {
-        return [$('a[title="All Products"]'),
+        return [$('a[title="LEATHERBOUND BOOKS"]'),
         $('a[title="YEAR OF SANDERSON"]'),
         $('a[title="PRINTED BOOKS"]'),
         $('a[title="DIGITAL BOOKS"]'),
@@ -116,6 +116,39 @@ class NavHeader extends BasePage{
         await expect(browser.url('https://www.dragonsteelbooks.com/collections/leatherbound-books'));
         await browser.pause(3000);
     }
+
+    // async selectProductSubMenuOpen() {
+    //     // Call the function to open the submenu
+    //     await this.subMenuOpen();
+    
+    //     // Get all product menu items
+    //     const menuItems = this.menuItems;
+    
+    //     // Define expected URLs corresponding to each menu item
+    //     const expectedUrls = this.expectedUrls;
+
+    //     // Loop through each menu item and click it
+    //     for (let i = 0; i < menuItems.length; i++) {
+    //         const menuItem = menuItems[i];
+    //         const expectedUrl = expectedUrls[i];
+    
+    //         // Wait for the menu item to be displayed and hover over it
+    //         await menuItem.waitForDisplayed({ timeout: 5000 });
+    //         await menuItem.moveTo();
+    //         await browser.pause(1000); // Optional: pause for better visibility during testing
+    
+    //         // Click the menu item
+    //         await menuItem.click();
+    
+    //         // Verify the URL is correct
+    //         await expect(browser).toHaveUrl(expectedUrl);
+    
+    //         // Navigate back to the main page or re-open the submenu if needed
+            
+    //         await this.subMenuOpen();
+    //     }
+    // }
+    
 
     // async selectProductSubMenuOpen(menuItems, expectedUrls) {
     //     await this.subMenuOpen();
