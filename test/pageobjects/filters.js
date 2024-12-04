@@ -36,7 +36,7 @@ import NavHeader from './navigationMenu';
         await this.sortByFiltersMenu();
 
         const displayProducts = await this.sortBySelectors;
-        await this.displayProducts.moveTo([3]);
+        await this.displayProducts.moveTo();
         await this.displayProducts.click();
     }
 
