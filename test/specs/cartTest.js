@@ -12,10 +12,10 @@ describe('cart page and components', () => {
         await CartArea.addItemToCart();
     })
 
-//     it('add multiple items to the chart to see if the icon changes', async () => {
-//         await CartArea.accessInventoryPage();
-//         await CartArea.addMultipleItemsToCart();
-//     })
+    it('add multiple items to the chart to see if the icon changes', async () => {
+        await CartArea.changeCartItemQuantity(5);
+        
+    })
 
 //     it('items should be saved in the cart after logging out then back in', async () => {
 //         await HamburgerMenu.hamMenuLogout();

@@ -39,8 +39,10 @@ class CartArea {
     }
 
     get inputNumberBox () {
-        return $('input[type="number"]')
+        return $('input[data-href="/cart/change?line=1&quantity=$qty"]')
     }
+
+    
 
     async cartOpen () {
         
@@ -108,8 +110,16 @@ class CartArea {
 
     }
 
-    async addMultipleItemsToCart () {
-
+    async changeCartItemQuantity (newQuantity) {
+        await this.addItemToCart();
+        await this.inputNumberBox.click();
+        await this.inputNumberBox.setValue('');
+        await this.inputNumberBox.setValue(newQuantity);
+        await browser.pause(1000);
+        const updatedValue = await this.inputNumberBox.getValue();
+            if (updatedValue != newQuantity) {
+                throw new Error(`Failed to update the quantity. Current value: ${updatedValue}`);
+        }
     }
 
 }
