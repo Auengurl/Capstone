@@ -40,7 +40,7 @@ describe ('open products pages from drop menu', () => {
 
 
 describe('sort by function',() => {
-    it('sort by works on all products page', async () => {
+    it('sort by menu opens', async () => {
         await SortBy.sortByFilters();
     });
 });

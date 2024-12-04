@@ -9,12 +9,14 @@ import NavHeader from './navigationMenu';
     }
 
     async sortByFilters () {
-        await this.openPage();
+        
         await NavHeader.catalogPageOpen();
 
-        const sortMenu = await $('select[id="desktop-SortBy"]');
+        const sortMenu = await $('select[name="sort_by"]');
         await sortMenu.moveTo();
         await sortMenu.click();
+        await browser.pause(3000);
+        await sortMenu.waitForDisplayed();
 
     }
  }
