@@ -40,13 +40,13 @@ import SortBy from "../pageobjects/filters.js";
 
 
 describe('sort by function',() => {
-    // it('sort by menu opens on product page', async () => {
-    //     await SortBy.sortByFiltersMenu();
-    // });
-
-    it('sort by selectors reorganize products accordingly', async () => {
-        await SortBy.sortByDisplayed();
+    it('sort by menu opens on product page', async () => {
+        await SortBy.sortByFiltersMenu();
     });
+
+    // it('sort by selectors reorganize products accordingly', async () => {
+    //     await SortBy.sortByDisplayed();
+    // });
 });
 
 
