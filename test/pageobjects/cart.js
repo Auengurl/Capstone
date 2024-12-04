@@ -1,6 +1,5 @@
 import { $, browser } from '@wdio/globals';
 
-import BasePage from './basePage.js';
 import NavHeader from './navigationMenu.js';
 
 
@@ -12,6 +11,10 @@ class CartArea {
 
     get cartSidebarMenu () {
         return $('#site-cart-sidebar');
+    }
+
+    get cartPageBtn () {
+        return $('a[href="/cart"]')
     }
 
     get continueBrowsingBtn () {
@@ -42,6 +45,10 @@ class CartArea {
         return $('input[data-href="/cart/change?line=1&quantity=$qty"]')
     }
 
+    get checkOutBtn () {
+        return $('button[name="checkout"]')
+    }
+
     
 
     async cartOpen () {
@@ -63,7 +70,7 @@ class CartArea {
 
     async cartOpenOnAllPages () {
         await NavHeader.catalogPageOpen();
-        await this.cartOpen();
+        await this.cartOpen();  
         await NavHeader.homePageOpen();
         await this.cartOpen();
         await NavHeader.realmCogPageOpen();
@@ -98,7 +105,7 @@ class CartArea {
         await expect(browser.url('https://www.dragonsteelbooks.com/collections/all/products/adolin-character-pin-series-2-013'));
         await this.addItemCartBtn.click();
         await this.cartOpen();
-        await browser.pause(3000);
+        
 
 
     }
@@ -122,6 +129,28 @@ class CartArea {
         }
     }
 
+    async cartPageOpen () {
+        await this.addItemToCart();
+        await this.cartPageBtn.click();
+        await expect(browser.url('https://www.dragonsteelbooks.com/cart'));
+    }
+
+    async checkoutPage () {
+        await this.checkOutBtn.click();
+        await expect(browser.url('https://www.dragonsteelbooks.com/checkout/'))
+        await browser.pause(3000);
+    }
+
+    async checkOutFromCartPage () {
+        await this.cartPageOpen();
+        await this.checkoutPage();
+    }
+
+    async checkOutFromSideCartMenu () {
+        await this.addItemToCart();
+        await this.checkoutPage();
+        
+    }
 }
 
 export default new CartArea();
