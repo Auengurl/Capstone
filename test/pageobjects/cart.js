@@ -30,6 +30,17 @@ class CartArea {
         return $('button[name="add"]')
     }
     
+    get removeItemCartBtn () {
+        return $('a[data-href="/cart/change?line=1&quantity=0"]')
+    }
+
+    get cartItem () {
+        return $('div[data-title="Adolin Character Pin - Series 2, #012 "]')
+    }
+
+    get inputNumberBox () {
+        return $('input[type="number"]')
+    }
 
     async cartOpen () {
         
@@ -90,6 +101,16 @@ class CartArea {
 
     }
 
+    async removeItmFromCart () {
+        await this.addItemToCart();
+        await this.removeItemCartBtn.click();
+        await browser.pause(3000);
+
+    }
+
+    async addMultipleItemsToCart () {
+
+    }
 
 }
 

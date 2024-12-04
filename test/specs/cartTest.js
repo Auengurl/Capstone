@@ -31,9 +31,13 @@ describe('cart page and components', () => {
 //         await CartArea.removeMultItemsFromPage();
 //     })
 
-//     it('remove item from cart page', async () => {
-//         await CartArea.removeItemFromCartPage();
-//     })
+    it('remove item from cart', async () => {
+        await CartArea.removeItmFromCart();
+    })
+
+    // it('remove item from cart page', async () => {
+    //     await CartArea.removeItemFromCartPage();
+    // })
 
 //     it('checkout page accessible', async () => {
 //         await CartArea.goToCheckoutPage();

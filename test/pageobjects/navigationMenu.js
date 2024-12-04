@@ -52,13 +52,7 @@ class NavHeader extends BasePage{
         ];
     }
  
-    get categoriesMenu() {
-        return $('.babymenu')
-    }
-    get category () {
-        return $('');
 
-    }
 
     
     async homePageOpen () {
@@ -73,14 +67,6 @@ class NavHeader extends BasePage{
         await this.openPage(this.realmCogHeaderLink, 'https://www.dragonsteelbooks.com/blogs/the-cognitive-realm');
     }
 
-    // async selectCategoryMenu () {
-    //     await this.openPage();
-    //     await this.catalogHeaderLink.click();
-    //     await this.categoriesMenu.click();
-    //     await this.category.click();
-    //     await browser.pause(3000);
-
-    // }
 
     async subMenuOpen() {
         await this.openPage;
