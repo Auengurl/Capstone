@@ -142,7 +142,7 @@ class CartArea {
     async checkoutPage () {
         await this.checkOutBtn.click();
         await expect(browser.url('https://www.dragonsteelbooks.com/checkout/'))
-        await browser.pause(3000);
+        
     }
 
     async checkOutFromCartPage () {

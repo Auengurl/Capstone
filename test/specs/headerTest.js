@@ -4,52 +4,52 @@ import BlogCogRealm from "../pageobjects/cogRealm.js";
 import SortBy from "../pageobjects/filters.js";
 
 
-describe('navigation headers', () => {
-        it('open home page', async () => {
-           await NavHeader.homePageOpen();
+// describe('navigation headers', () => {
+//         it('open home page', async () => {
+//            await NavHeader.homePageOpen();
 
-        });
+//         });
 
-        it('open catalog page', async () => {
-            await NavHeader.catalogPageOpen();
-        });
+//         it('open catalog page', async () => {
+//             await NavHeader.catalogPageOpen();
+//         });
 
-        it('open realm blog page', async () => {
-            await NavHeader.realmCogPageOpen();
+//         it('open realm blog page', async () => {
+//             await NavHeader.realmCogPageOpen();
  
-         });
-});
+//          });
+// });
 
-describe('blog realm buttons', () => {
-    it('open all blogs using the buttons', async () => {
-        await BlogCogRealm.clickAllTagsBtns();
+// describe('blog realm buttons', () => {
+//     it('open all blogs using the buttons', async () => {
+//         await BlogCogRealm.clickAllTagsBtns();
 
-    });
-});
+//     });
+// });
 
-describe ('open products pages from drop menu', () => {
-    it('open catalog menu', async () => {
-        await NavHeader.subMenuOpen();
-    });
+// describe ('open products pages from drop menu', () => {
+//     it('open catalog menu', async () => {
+//         await NavHeader.subMenuOpen();
+//     });
 
-    it('click an item from catalog menu', async () => {
-        await NavHeader.selectProductSubMenuOpen();
-    });
-})
+//     it('click an item from catalog menu', async () => {
+//         await NavHeader.selectProductSubMenuOpen();
+//     });
+// })
 
 
 
 describe('sort by function',() => {
     it('sort by menu opens on product page', async () => {
-        await SortBy.sortByFilters();
+        await SortBy.sortByFiltersMenu();
+    });
+
+    it('sort by selectors reorganize products accordingly', async () => {
+        await SortBy.sortByDisplayed();
     });
 });
 
-// describe('',() => {
-//     it('', async () => {
 
-//     });
-// });
 
  
 
