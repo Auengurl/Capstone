@@ -3,24 +3,24 @@ import CartArea from '../pageobjects/cart.js';
 
 
 describe('cart page and components', () => {
-    // it('cart side menu opens from cart icon on all pages', async () => {
+    it('cart side menu opens from cart icon on all pages', async () => {
         
-    //     await CartArea.cartOpenOnAllPages();
-    // })
+        await CartArea.cartOpenOnAllPages();
+    })
 
-    // it('add item to cart shows in cart', async () => {    
-    //     await CartArea.addItemToCart();
-    // })
+    it('add item to cart shows in cart', async () => {    
+        await CartArea.addItemToCart();
+    })
 
-    // it('add multiple items to the chart to see if the icon changes', async () => {
-    //     await CartArea.changeCartItemQuantity(5);
+    it('add multiple items to the chart to see if the icon changes', async () => {
+        await CartArea.changeCartItemQuantity(5);
         
-    // })
+    })
 
-    // it('should be able to view whole cart page using View Cart button from side menu', async () => {
+    it('should be able to view whole cart page using View Cart button from side menu', async () => {
         
-    //     await CartArea.cartPageOpen();
-    // })
+        await CartArea.cartPageOpen();
+    })
     
 //     it('remove item from the inventory page to see number in cart change', async () => {
 //         await CartArea.removeItem();
@@ -59,9 +59,9 @@ describe('cart page and components', () => {
 //     })
 
 
-//     it('checkout fields using valid information to complete checkout', async () => {
-//         await CartArea.validCheckoutProcess();
-//     })
+    it('shipping link opens from checkout page', async () => {
+        await CartArea.shippingPageOpen();
+    })
 
    
 

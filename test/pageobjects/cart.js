@@ -49,6 +49,10 @@ class CartArea {
         return $('button[name="checkout"]')
     }
 
+    get shippingPageLink () {
+        return $('a[href="/policies/shipping-policy"]')
+    }
+
     
 
     async cartOpen () {
@@ -149,6 +153,12 @@ class CartArea {
     async checkOutFromSideCartMenu () {
         await this.addItemToCart();
         await this.checkoutPage();
+        
+    }
+
+    async shippingPageOpen() {
+        await this.cartPageOpen();
+        await this.shippingPageLink.click();
         
     }
 }
