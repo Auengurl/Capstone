@@ -1,5 +1,4 @@
 import { $, browser } from '@wdio/globals';
-
 import NavHeader from './navigationMenu.js';
 
 
@@ -56,21 +55,9 @@ class CartArea {
     
 
     async cartOpen () {
-        
         await this.cartIconBtn.click();
         await expect(this.cartSidebarMenu);
-        
     }
-//     async cartOpenOnPages () {
-
-//         await BasePage.o();
-//         const items = this.addMultipleItems;
-//             for (const item of items) {
-//             await item.click();
-// }
-//         await expect(this.shoppingCartBtn).toBeDisplayed();
-        
-//     }
 
     async cartOpenOnAllPages () {
         await NavHeader.catalogPageOpen();
@@ -80,28 +67,7 @@ class CartArea {
         await NavHeader.realmCogPageOpen();
         await this.cartOpen();
         await browser.pause(3000);
-
     }
-
-    // async openCartOnPages(pages) {
-    //     for (const pageOpenFunc of pages) {
-    //         await pageOpenFunc(); // Navigate to the page
-    //         await this.cartOpen(); // Open the cart
-    //     }
-    //     await browser.pause(3000); // Optional: Pause after all actions
-    // }
-    
-    // async cartOpenOnAllPages () {
-    //     const pages = [
-    //         NavHeader.catalogPageOpen,
-    //         NavHeader.homePageOpen,
-    //         NavHeader.realmCogPageOpen
-    //     ];
-    //     await this.openCartOnPages(pages);
-    // }
-    
-
-    
 
     async addItemToCart () {
         await NavHeader.catalogPageOpen();
@@ -109,16 +75,12 @@ class CartArea {
         await expect(browser.url('https://www.dragonsteelbooks.com/collections/all/products/adolin-character-pin-series-2-013'));
         await this.addItemCartBtn.click();
         await this.cartOpen();
-        
-
-
     }
 
     async removeItmFromCart () {
         await this.addItemToCart();
         await this.removeItemCartBtn.click();
         await browser.pause(3000);
-
     }
 
     async changeCartItemQuantity (newQuantity) {
@@ -142,7 +104,6 @@ class CartArea {
     async checkoutPage () {
         await this.checkOutBtn.click();
         await expect(browser.url('https://www.dragonsteelbooks.com/checkout/'))
-        
     }
 
     async checkOutFromCartPage () {
@@ -153,13 +114,11 @@ class CartArea {
     async checkOutFromSideCartMenu () {
         await this.addItemToCart();
         await this.checkoutPage();
-        
     }
 
     async shippingPageOpen() {
         await this.cartPageOpen();
         await this.shippingPageLink.click();
-        
     }
 }
 

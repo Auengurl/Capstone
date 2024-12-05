@@ -21,12 +21,7 @@ export default class BasePage {
         await  expect(this.selectorDetector());
     }
 
-    // async productDropMenuOpen(prodsLink, expectedUrl) {
-    //     await this.openBasePage(); 
-    //     await headerLink.click();  
-    //     await expect(browser).toHaveUrl(expectedUrl); 
-    //     await browser.pause(3000); 
-    // }
+   
 
 }
 
