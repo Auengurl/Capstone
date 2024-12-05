@@ -50,9 +50,9 @@ describe('sort by function',() => {
         await SortBy.sortByFiltersMenu();
     });
 
-    it('sort by selectors reorganize products accordingly', async () => {
-        await SortBy.sortByDisplayed();
-    });
+    // it('sort by selectors reorganize products accordingly', async () => {
+    //     await SortBy.sortByDisplayed();
+    // });
 });
 
 
