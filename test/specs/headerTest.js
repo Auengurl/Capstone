@@ -33,10 +33,10 @@ import SortBy from "../pageobjects/filters.js";
 //     });
 
 //     it('click each submenu item and verify the Url', async () => {
-//         const menuItems = NavHeader.menuItems; // Get the array of menu items
+//         const menuItems = NavHeader.menuItems; 
 
 //         for (const item of menuItems) {
-//             const { title, expectedUrl } = item; // Destructure title and expectedUrl
+//             const { title, expectedUrl } = item; 
 //             await NavHeader.selectProductSubMenuOpenExpectUrl(await title, expectedUrl);
             
 //         }
