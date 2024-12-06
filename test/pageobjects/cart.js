@@ -81,8 +81,8 @@ class CartArea {
         for (const page of pages) {
             try {
                 await page.openPage(); 
-                await this.cartOpen(); // Open the cart
-                await this.cartSideBarClose(); // Close the cart
+                await this.cartOpen(); 
+                await this.cartSideBarClose(); 
                 
             } catch (error) {
                 console.error(`Error on ${page.name}:`, error);
@@ -139,9 +139,17 @@ class CartArea {
         await this.checkoutPage();
     }
 
-    async shippingPageOpen() {
+    async shippingPageOpen () {
         await this.cartPageOpen();
         await this.shippingPageLink.click();
+    }
+
+    async continueBrowsingReturnsCatalog () {
+        await this.addItemToCart();
+        await this.removeItmFromCart();
+        await this.continueBrowsingBtn.waitForDisplayed();
+        await this.continueBrowsingBtn.click();
+        await NavHeader.catalogHeaderLink.waitForExist();
     }
 }
 
