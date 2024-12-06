@@ -59,13 +59,33 @@ class CartArea {
         await expect(this.cartSidebarMenu);
     }
 
+    // async cartSideBarClose () {
+    //     await this.closeShoppingSideBarBtn.moveTo();
+    //     await this.closeShoppingSideBarBtn.click();
+        
+    // }
+    async cartSideBarClose() {
+        if (await this.closeShoppingSideBarBtn.isDisplayed()) {
+          await this.closeShoppingSideBarBtn.moveTo();
+          console.log('Pass close');
+          await this.closeShoppingSideBarBtn.click();
+          console.log('Pass close');
+        } else {
+          console.error('Close button not visible or interactable');
+        }
+      }
+
+
     async cartOpenOnAllPages () {
         await NavHeader.catalogPageOpen();
-        await this.cartOpen();  
-        await NavHeader.homePageOpen();
-        await this.cartOpen();
-        await NavHeader.realmCogPageOpen();
-        await this.cartOpen();
+        await this.cartOpen(); 
+        await this.cartSideBarClose(); 
+        console.log('Pass close');
+        
+        // await NavHeader.homePageOpen();
+        // await this.cartOpen();
+        // await NavHeader.realmCogPageOpen();
+        // await this.cartOpen();
         await browser.pause(3000);
     }
 
@@ -80,7 +100,6 @@ class CartArea {
     async removeItmFromCart () {
         await this.addItemToCart();
         await this.removeItemCartBtn.click();
-        await browser.pause(3000);
     }
 
     async changeCartItemQuantity (newQuantity) {
@@ -88,7 +107,6 @@ class CartArea {
         await this.inputNumberBox.click();
         await this.inputNumberBox.setValue('');
         await this.inputNumberBox.setValue(newQuantity);
-        await browser.pause(1000);
         const updatedValue = await this.inputNumberBox.getValue();
             if (updatedValue != newQuantity) {
                 throw new Error(`Failed to update the quantity. Current value: ${updatedValue}`);
@@ -100,6 +118,8 @@ class CartArea {
         await this.cartPageBtn.click();
         await expect(browser.url('https://www.dragonsteelbooks.com/cart'));
     }
+
+   
 
     async checkoutPage () {
         await this.checkOutBtn.click();
