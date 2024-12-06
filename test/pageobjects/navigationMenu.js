@@ -17,7 +17,11 @@ class NavHeader extends BasePage{
     }
 
     get realmCogHeaderLink () {
-        return $('li[id="menu-item-read-the-cognitive-realm"]');
+        return $('li[id="menu-item-blog-the-cognitive-realm"]');
+    }
+
+    get auctionPageLink () {
+        return $('li[id="menu-item-auction-wind-and-truth-handwritten-pages"]');
     }
     
     get menuItems () {
@@ -88,8 +92,11 @@ class NavHeader extends BasePage{
         await this.openPage(this.realmCogHeaderLink, 'https://www.dragonsteelbooks.com/blogs/the-cognitive-realm');
     }
 
+    async auctionPageOpen () {
+        await this.openBasePage(this.auctionPageLink, 'https://www.dragonsteelbooks.com/pages/wind-and-truth-auction')
+    }
 
-    async subMenuOpen() {
+    async subMenuOpen () {
         await this.openBasePage();
 
         const catalogMenu = await $('#menu-item-catalog > a'); 

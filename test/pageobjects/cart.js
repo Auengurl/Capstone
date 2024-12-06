@@ -59,35 +59,38 @@ class CartArea {
         await expect(this.cartSidebarMenu);
     }
 
-    // async cartSideBarClose () {
-    //     await this.closeShoppingSideBarBtn.moveTo();
-    //     await this.closeShoppingSideBarBtn.click();
-        
-    // }
     async cartSideBarClose() {
         if (await this.closeShoppingSideBarBtn.isDisplayed()) {
           await this.closeShoppingSideBarBtn.moveTo();
-          console.log('Pass close');
           await this.closeShoppingSideBarBtn.click();
-          console.log('Pass close');
         } else {
           console.error('Close button not visible or interactable');
         }
       }
 
 
-    async cartOpenOnAllPages () {
-        await NavHeader.catalogPageOpen();
-        await this.cartOpen(); 
-        await this.cartSideBarClose(); 
-        console.log('Pass close');
-        
-        // await NavHeader.homePageOpen();
-        // await this.cartOpen();
-        // await NavHeader.realmCogPageOpen();
-        // await this.cartOpen();
-        await browser.pause(3000);
+    async cartOpenOnAllPages() {
+
+        const pages = [
+            { name: 'Catalog Page', openPage: async () => await NavHeader.catalogPageOpen() },
+            { name: 'Home Page', openPage: async () => await NavHeader.homePageOpen() },
+            { name: 'The Cognitive Realm Page', openPage: async () => await NavHeader.realmCogPageOpen() },
+            { name: 'Auction | Wind and Truth', openPage: async () => await NavHeader.auctionPageOpen() },
+        ];
+
+        for (const page of pages) {
+            try {
+                await page.openPage(); 
+                await this.cartOpen(); // Open the cart
+                await this.cartSideBarClose(); // Close the cart
+                
+            } catch (error) {
+                console.error(`Error on ${page.name}:`, error);
+            }
+    
+        }
     }
+    
 
     async addItemToCart () {
         await NavHeader.catalogPageOpen();
