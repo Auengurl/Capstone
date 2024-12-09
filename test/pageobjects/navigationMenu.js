@@ -81,23 +81,23 @@ class NavHeader extends BasePage{
 
     
     async homePageOpen () {
-        await this.openPage(this.homeHeaderLink, 'https://www.dragonsteelbooks.com/');
+        await this.openNavigationHeaderPage(this.homeHeaderLink, 'https://www.dragonsteelbooks.com/');
     }
 
     async catalogPageOpen() {
-        await this.openPage(this.catalogHeaderLink, 'https://www.dragonsteelbooks.com/collections/all');
+        await this.openNavigationHeaderPage(this.catalogHeaderLink, 'https://www.dragonsteelbooks.com/collections/all');
     }
 
     async realmCogPageOpen () {
-        await this.openPage(this.realmCogHeaderLink, 'https://www.dragonsteelbooks.com/blogs/the-cognitive-realm');
+        await this.openNavigationHeaderPage(this.realmCogHeaderLink, 'https://www.dragonsteelbooks.com/blogs/the-cognitive-realm');
     }
 
     async auctionPageOpen () {
-        await this.openBasePage(this.auctionPageLink, 'https://www.dragonsteelbooks.com/pages/wind-and-truth-auction')
+        await this.openDragonsteelHomeBasePage(this.auctionPageLink, 'https://www.dragonsteelbooks.com/pages/wind-and-truth-auction')
     }
 
     async subMenuOpen () {
-        await this.openBasePage();
+        await this.openDragonsteelHomeBasePage();
 
         const catalogMenu = await $('#menu-item-catalog > a'); 
         await catalogMenu.moveTo();

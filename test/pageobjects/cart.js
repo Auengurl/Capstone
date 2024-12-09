@@ -84,15 +84,15 @@ class CartArea {
     async cartOpenOnAllPages() {
 
         const pages = [
-            { name: 'Catalog Page', openPage: async () => await NavHeader.catalogPageOpen() },
-            { name: 'Home Page', openPage: async () => await NavHeader.homePageOpen() },
-            { name: 'The Cognitive Realm Page', openPage: async () => await NavHeader.realmCogPageOpen() },
-            { name: 'Auction | Wind and Truth', openPage: async () => await NavHeader.auctionPageOpen() },
+            { name: 'Catalog Page', openNavigationHeaderPage: async () => await NavHeader.catalogPageOpen() },
+            { name: 'Home Page', openNavigationHeaderPage: async () => await NavHeader.homePageOpen() },
+            { name: 'The Cognitive Realm Page', openNavigationHeaderPage: async () => await NavHeader.realmCogPageOpen() },
+            { name: 'Auction | Wind and Truth', openNavigationHeaderPage: async () => await NavHeader.auctionPageOpen() },
         ];
 
         for (const page of pages) {
             try {
-                await page.openPage(); 
+                await page.openNavigationHeaderPage(); 
                 await this.cartOpen(); 
                 await this.cartSideBarClose(); 
                 
@@ -216,7 +216,7 @@ class CartArea {
 
     async continueBrowsingReturnsCatalog () {
         await this.addItemToCart();
-        await this.removeItmFromCart();
+        await this.removeItemFromCart();
         await this.continueBrowsingBtn.waitForDisplayed();
         await this.continueBrowsingBtn.click();
         await NavHeader.catalogHeaderLink.waitForExist();

@@ -3,15 +3,15 @@ import { $ } from '@wdio/globals';
  
 export default class BasePage {
     
-    openBasePage () {
+    openDragonsteelHomeBasePage () {
         return browser.url(`https://www.dragonsteelbooks.com/`);
     }
     get selectorDetector () {
         return $('.text-animation--underline-in-header');
     }
 
-    async openPage(headerLink, expectedUrl) {
-        await this.openBasePage(); 
+    async openNavigationHeaderPage(headerLink, expectedUrl) {
+        await this.openDragonsteelHomeBasePage(); 
         await headerLink.click();  
         await expect(browser).toHaveUrl(expectedUrl); 
         await browser.pause(3000); 
