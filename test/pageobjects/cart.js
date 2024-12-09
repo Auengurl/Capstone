@@ -44,6 +44,14 @@ class CartArea {
         return $('input[data-href="/cart/change?line=1&quantity=$qty"]')
     }
 
+    get increaseItemBtn () {
+        return $('button[class="qty-button qty-plus no-js-hidden"]')
+    }
+
+    get decreaseItemBtn () {
+        return $('button[class="qty-button qty-minus no-js-hidden"]')
+    }
+
     get checkOutBtn () {
         return $('button[name="checkout"]')
     }
@@ -100,6 +108,21 @@ class CartArea {
         await this.cartOpen();
     }
 
+    async changeCartPageItems (updatedQuantity) {
+        await this.cartPageOpen();
+        await this.inputNumberBox.click();
+        await this.inputNumberBox.setValue('');
+        await this.inputNumberBox.setValue(updatedQuantity);
+        const updatedValue = await this.inputNumberBox.getValue();
+            if (updatedValue != updatedQuantity) {
+                throw new Error(`Failed to update the quantity. Current value: ${updatedValue}`);
+        } 
+
+        
+        await expect(parseInt(updatedQuantity)).toBe(expected);
+        await browser.pause(3000);
+    }
+
     async removeItmFromCart () {
         await this.addItemToCart();
         await this.removeItemCartBtn.click();
@@ -116,15 +139,69 @@ class CartArea {
         }
     }
 
+   
+    async increaseItemInCart() {
+        await this.addItemToCart();
+    
+        const itemInputField = await this.inputNumberBox;
+        let initialQuantity = await itemInputField.getValue();
+        initialQuantity = parseInt(initialQuantity); 
+        const expectedQuantity = initialQuantity + 1;
+    
+        await this.increaseItemBtn.moveTo();
+        await this.increaseItemBtn.click();
+    
+        await browser.waitUntil(async () => {
+            const currentQuantity = await itemInputField.getValue();
+            return parseInt(currentQuantity) === expectedQuantity;
+        }, {
+            timeout: 5000, 
+            timeoutMsg: `The quantity did not update to ${expectedQuantity} as expected.`
+        });
+    
+        const updatedQuantity = await itemInputField.getValue();
+        await expect(parseInt(updatedQuantity)).toBe(expectedQuantity);
+    }
+    
+    async decreaseItemInCart () {
+        await this.addItemToCart();
+
+        const itemInputField = await this.inputNumberBox;
+        let initialQuantity = await itemInputField.getValue();
+        initialQuantity = parseInt(initialQuantity); 
+        const expectedQuantity = initialQuantity - 1;
+    
+        await this.decreaseItemBtn.moveTo();
+        await this.decreaseItemBtn.click(); 
+
+        await browser.waitUntil(async () => {
+            const currentQuantity = await itemInputField.getValue();
+            return parseInt(currentQuantity) === expectedQuantity;
+        }, {
+            timeout: 5000, 
+            timeoutMsg: `The quantity did not update to ${expectedQuantity} as expected.`
+        });
+    
+        const updatedQuantity = await itemInputField.getValue();
+        await expect(parseInt(updatedQuantity)).toBe(expectedQuantity);
+    }
+    
+    
+
     async cartPageOpen () {
         await this.addItemToCart();
         await this.cartPageBtn.click();
         await expect(browser.url('https://www.dragonsteelbooks.com/cart'));
     }
 
-   
+   async cartPageAddItems () {
+        await this.cartPageOpen();
+
+        await this.decreaseItemInCart();
+   }
 
     async checkoutPage () {
+        await this.checkOutBtn.moveTo();
         await this.checkOutBtn.click();
         await expect(browser.url('https://www.dragonsteelbooks.com/checkout/'))
     }
