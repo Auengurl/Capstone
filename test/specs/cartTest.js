@@ -18,13 +18,14 @@ describe('cart page and components', () => {
     // it('add multiple items by typing in a number to the chart to see if the icon changes', async () => {
     //     await CartArea.changeCartItemQuantity(5);
     // })
-    //recheck this
+
+    // // recheck this
     // it('add multiple of item to cart using the + button', async () => {
     //     await CartArea.increaseItemInCart();
 
     // })
 
-    //recheck this
+    // // recheck this
     // it('decrease item in cart using the - button', async () => {
     //     await CartArea.decreaseItemInCart();
     // })
@@ -34,35 +35,12 @@ describe('cart page and components', () => {
     // })
 
     
-    //remove using the - button multiple items to cart and
-    // it('remove item from the inventory page to see number in cart change', async () => {
-    //     await CartArea.removeItem();
-    // })
-
-    //remove items from the cart page
-    // it('remove multiple items from inventory page',async () => {
-    //     await CartArea.removeMultItemsFromPage();
-    // })
-
-    // it('remove item from cart', async () => {
-    //     await CartArea.removeItmFromCart();
-    // })
-
-    // work this one
-    // it('remove item from cart page', async () => {
-    //     await CartArea.removeItemFromCartPage();
-    // })
-
-        //not sure on this
-    // it('checkout page accessible from cart page', async () => {
-    //     await CartArea.checkOutFromCartPage();
-    // })
-
-    it('change cart items from Cart Page View', async () => {
-        await CartArea.changeCartPageItems(10);
+    // remove using the - button multiple items to cart and check this one!
+    it('remove item from the inventory page to see empty cart', async () => {
+        await CartArea.removeItemFromCart();
     })
 
-    //recheck this
+    // // recheck this
     // it('checkout page accessible from side cart menu', async () => {
     //     await CartArea.checkOutFromSideCartMenu();
     // })

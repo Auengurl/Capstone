@@ -36,6 +36,10 @@ class CartArea {
         return $('a[data-href="/cart/change?line=1&quantity=0"]')
     }
 
+    get emptyCartMessage () {
+        return $("//div[@class='cart__items' and contains(text(), 'Your cart is currently empty.')]");
+    }
+
     get cartItem () {
         return $('div[data-title="Adolin Character Pin - Series 2, #012 "]')
     }
@@ -108,24 +112,13 @@ class CartArea {
         await this.cartOpen();
     }
 
-    async changeCartPageItems (updatedQuantity) {
-        await this.cartPageOpen();
-        await this.inputNumberBox.click();
-        await this.inputNumberBox.setValue('');
-        await this.inputNumberBox.setValue(updatedQuantity);
-        const updatedValue = await this.inputNumberBox.getValue();
-            if (updatedValue != updatedQuantity) {
-                throw new Error(`Failed to update the quantity. Current value: ${updatedValue}`);
-        } 
-
-        
-        await expect(parseInt(updatedQuantity)).toBe(expected);
-        await browser.pause(3000);
-    }
-
-    async removeItmFromCart () {
+    async removeItemFromCart () {
         await this.addItemToCart();
+
+        await this.removeItemCartBtn.moveTo();
         await this.removeItemCartBtn.click();
+
+        await expect(this.emptyCartMessage).toBeDisplayed(); 
     }
 
     async changeCartItemQuantity (newQuantity) {
