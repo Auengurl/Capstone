@@ -33,7 +33,7 @@ class CartArea {
     }
     
     get removeItemCartBtn () {
-        return $('a[data-href="/cart/change?line=1&quantity=0"]')
+        return $('a[title="Remove"]')
     }
 
     get emptyCartMessage () {
@@ -115,7 +115,7 @@ class CartArea {
     async removeItemFromCart () {
         await this.addItemToCart();
 
-        await this.removeItemCartBtn.moveTo();
+        await this.removeItemCartBtn.waitForClickable({ timeout: 5000 });
         await this.removeItemCartBtn.click();
 
         await expect(this.emptyCartMessage).toBeDisplayed(); 
@@ -211,13 +211,16 @@ class CartArea {
 
     async shippingPageOpen () {
         await this.cartPageOpen();
+
+        await this.shippingPageLink.moveTo();
         await this.shippingPageLink.click();
     }
 
-    async continueBrowsingReturnsCatalog () {
+    async continueBrowsingReturnsToCatalogPage () {
         await this.addItemToCart();
         await this.removeItemFromCart();
-        await this.continueBrowsingBtn.waitForDisplayed();
+
+        await this.continueBrowsingBtn.isDisplayed();
         await this.continueBrowsingBtn.click();
         await NavHeader.catalogHeaderLink.waitForExist();
     }
