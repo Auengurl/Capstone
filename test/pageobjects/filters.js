@@ -20,6 +20,7 @@ import NavHeader from './navigationMenu';
         ]
     }
 
+
     async sortByFiltersMenu () {
         await NavHeader.catalogPageOpen();
         const sortMenu = await this.sortByTable;
@@ -27,17 +28,29 @@ import NavHeader from './navigationMenu';
         await sortMenu.click();
         await sortMenu.waitForDisplayed();
 
-        await expect(sortMenu).visable
+        await expect(sortMenu).toBeDisplayed();
         
     }
 
-    async sortByDisplayed () {
+    async sortByDisplayed (sortSelectorTitle, expectedUrl) {
         await this.sortByFiltersMenu();
 
-        const displayProducts = await this.sortBySelectors;
-        await this.displayProducts.moveTo();
-        await this.displayProducts.click();
+        const sortOption = await $(sortSelectorTitle);
+
+
+        await this.sortOption.moveTo();
+        await this.sortOption.click();
+
+        
+        await expect(browser).toHaveUrl(expectedUrl);
     }
+    // const menuItems = NavHeader.menuItems; 
+
+    //     for (const item of menuItems) {
+    //         const { title, expectedUrl } = item; 
+    //         await NavHeader.selectProductSubMenuOpenExpectUrl(await title, expectedUrl);
+            
+    //     }
 
 
  }
