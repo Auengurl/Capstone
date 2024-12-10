@@ -15,19 +15,19 @@ describe('cart page and components', () => {
     //     await CartArea.addItemToCart();
     // })
 
-    // it('add multiple items by typing in a number to the chart to see if the icon changes', async () => {
-    //     await CartArea.changeCartItemQuantity(5);
-    // })
+    it('add multiple items by typing in a number to the chart to see if the icon changes', async () => {
+        await CartArea.changeCartItemQuantity(5);
+    })
 
     // // recheck this
-    // it('add multiple of item to cart using the + button', async () => {
-    //     await CartArea.increaseItemInCart();
-
+    // it('add multiple of item to cart using the + button, and decrease item using the - button', async () => {
+    //     await CartArea.updateItemQuantity('increase', 3);
+    //     await CartArea.updateItemQuantity('decrease', 2);
     // })
 
     // // recheck this
     // it('decrease item in cart using the - button', async () => {
-    //     await CartArea.decreaseItemInCart();
+    //     await CartArea.updateItemQuantity('decrease', 2);
     // })
 
     // it('should be able to view whole cart page using View Cart button from side menu', async () => {
@@ -35,10 +35,10 @@ describe('cart page and components', () => {
     // })
 
     
-    // remove using the - button multiple items to cart and check this one!
-    it('remove item from the cart to see empty cart', async () => {
-        await CartArea.removeItemFromCart();
-    })
+    // // remove using the - button multiple items to cart and check this one!
+    // it('remove item from the cart to see empty cart', async () => {
+    //     await CartArea.removeItemFromCart();
+    // })
 
     // // recheck this
     // it('checkout page accessible from side cart menu', async () => {

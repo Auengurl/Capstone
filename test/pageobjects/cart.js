@@ -13,27 +13,27 @@ class CartArea {
     }
 
     get cartPageBtn () {
-        return $('a[href="/cart"]')
+        return $('a[href="/cart"]');
     }
 
     get continueBrowsingBtn () {
-        return $('a[class="cart-continue button button--fullwidth button--solid button--regular"]')
+        return $('a[class="cart-continue button button--fullwidth button--solid button--regular"]');
     }
 
     get closeShoppingSideBarBtn () {
-        return $('button[class="sidebar__close"]')
+        return $('button[class="sidebar__close"]');
     }
 
     get productItem() {
-        return $('a[href="/collections/all/products/adolin-character-pin-series-2-013"]')
+        return $('a[href="/collections/all/products/adolin-character-pin-series-2-013"]');
     }
 
     get addItemCartBtn () {
-        return $('button[name="add"]')
+        return $('button[name="add"]');
     }
     
     get removeItemCartBtn () {
-        return $('a[title="Remove"]')
+        return $('a[title="Remove"]');
     }
 
     get emptyCartMessage () {
@@ -41,27 +41,31 @@ class CartArea {
     }
 
     get cartItem () {
-        return $('div[data-title="Adolin Character Pin - Series 2, #012 "]')
+        return $('div[data-title="Adolin Character Pin - Series 2, #012 "]');
     }
 
     get inputNumberBox () {
-        return $('input[data-href="/cart/change?line=1&quantity=$qty"]')
+        return $('input[data-href="/cart/change?line=1&quantity=$qty"]');
     }
 
+    get cartCount () {
+        return $('span[data-header-cart-count]');
+    } 
+
     get increaseItemBtn () {
-        return $('button[class="qty-button qty-plus no-js-hidden"]')
+        return $('button[class="qty-button qty-plus no-js-hidden"]');
     }
 
     get decreaseItemBtn () {
-        return $('button[class="qty-button qty-minus no-js-hidden"]')
+        return $('button[class="qty-button qty-minus no-js-hidden"]');
     }
 
     get checkOutBtn () {
-        return $('button[name="checkout"]')
+        return $('button[name="checkout"]');
     }
 
     get shippingPageLink () {
-        return $('a[href="/policies/shipping-policy"]')
+        return $('a[href="/policies/shipping-policy"]');
     }
 
     
@@ -114,22 +118,29 @@ class CartArea {
 
     async removeItemFromCart () {
         await this.addItemToCart();
-
         await this.removeItemCartBtn.waitForClickable({ timeout: 5000 });
         await this.removeItemCartBtn.click();
-
         await expect(this.emptyCartMessage).toBeDisplayed(); 
     }
 
     async changeCartItemQuantity (newQuantity) {
         await this.addItemToCart();
         await this.inputNumberBox.click();
-        await this.inputNumberBox.setValue('');
         await this.inputNumberBox.setValue(newQuantity);
         const updatedValue = await this.inputNumberBox.getValue();
             if (updatedValue != newQuantity) {
                 throw new Error(`Failed to update the quantity. Current value: ${updatedValue}`);
         }
+        await browser.waitUntil(async () => {
+            const cartCount = await this.cartCount.getText();
+            return parseInt(cartCount) === parseInt(newQuantity);
+        }, {
+            timeout: 5000,
+            timeoutMsg: `The cart count did not update to ${newQuantity} as expected.`
+        });
+        
+        const cartCountText = await this.cartCount.getText();
+        await expect(parseInt(cartCountText)).toBe(parseInt(newQuantity));
     }
 
    
@@ -154,31 +165,66 @@ class CartArea {
     
         const updatedQuantity = await itemInputField.getValue();
         await expect(parseInt(updatedQuantity)).toBe(expectedQuantity);
+
+        await browser.pause(3000);
     }
     
-    async decreaseItemInCart () {
-        await this.addItemToCart();
+    // async decreaseItemInCart () {
+    //     await this.addItemToCart();
 
-        const itemInputField = await this.inputNumberBox;
-        let initialQuantity = await itemInputField.getValue();
-        initialQuantity = parseInt(initialQuantity); 
-        const expectedQuantity = initialQuantity - 1;
+    //     const itemInputField = await this.inputNumberBox;
+    //     let initialQuantity = await itemInputField.getValue();
+    //     initialQuantity = parseInt(initialQuantity); 
+    //     const expectedQuantity = initialQuantity - 1;
     
-        await this.decreaseItemBtn.moveTo();
-        await this.decreaseItemBtn.click(); 
+    //     await this.decreaseItemBtn.moveTo();
+    //     await this.decreaseItemBtn.click(); 
 
-        await browser.waitUntil(async () => {
-            const currentQuantity = await itemInputField.getValue();
-            return parseInt(currentQuantity) === expectedQuantity;
-        }, {
-            timeout: 5000, 
-            timeoutMsg: `The quantity did not update to ${expectedQuantity} as expected.`
-        });
+    //     await browser.waitUntil(async () => {
+    //         const currentQuantity = await itemInputField.getValue();
+    //         return parseInt(currentQuantity) === expectedQuantity;
+    //     }, {
+    //         timeout: 5000, 
+    //         timeoutMsg: `The quantity did not update to ${expectedQuantity} as expected.`
+    //     });
     
-        const updatedQuantity = await itemInputField.getValue();
-        await expect(parseInt(updatedQuantity)).toBe(expectedQuantity);
-    }
+    //     const updatedQuantity = await itemInputField.getValue();
+    //     await expect(parseInt(updatedQuantity)).toBe(expectedQuantity);
+    // }
     
+    // //trying to combine the + & - button functions
+    // async updateItemQuantity(action, times) {
+    //     await this.addItemToCart();
+    
+    //     const itemInputField = await this.inputNumberBox;
+    //     const initialQuantity = parseInt(await itemInputField.getValue());
+    
+    //     const expectedQuantity =
+    //         action === 'increase' ? initialQuantity + times : initialQuantity - times;
+    
+    //     const buttonToClick =
+    //         action === 'increase' ? this.increaseItemBtn : this.decreaseItemBtn;
+    
+    //     for (let i = 0; i < times; i++) {
+    //         await buttonToClick.scrollIntoView();
+    //         await buttonToClick.waitForClickable({ timeout: 5000 });
+    //         await buttonToClick.click();
+    //         await buttonToClick.waitForClickable({ timeout: 5000 });
+    
+    //         await browser.pause(3000);
+    //     }
+
+    //     await browser.waitUntil(async () => {
+    //         const currentQuantity = parseInt(await itemInputField.getValue());
+    //         return currentQuantity === expectedQuantity;
+    //     }, {
+    //         timeout: 5000,
+    //         timeoutMsg: `The quantity did not update to ${expectedQuantity} as expected.`
+    //     });
+    
+    //     const finalQuantity = parseInt(await itemInputField.getValue());
+    //     await expect(finalQuantity).toBe(expectedQuantity);
+    // }
     
 
     async cartPageOpen () {
@@ -189,7 +235,6 @@ class CartArea {
 
    async cartPageAddItems () {
         await this.cartPageOpen();
-
         await this.decreaseItemInCart();
    }
 
@@ -211,7 +256,6 @@ class CartArea {
 
     async shippingPageOpen () {
         await this.cartPageOpen();
-
         await this.shippingPageLink.moveTo();
         await this.shippingPageLink.click();
     }
