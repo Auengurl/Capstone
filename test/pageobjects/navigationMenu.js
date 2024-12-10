@@ -105,6 +105,7 @@ class NavHeader extends BasePage{
         const allProducts = await $('a[title="All Products"]');
         await allProducts.waitForDisplayed();
         await allProducts.moveTo();
+
     }
 
     async selectProductSubMenuOpenExpectUrl(titleSelector, expectedUrl) {

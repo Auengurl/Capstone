@@ -21,15 +21,14 @@ import NavHeader from './navigationMenu';
     }
 
     async sortByFiltersMenu () {
-        
         await NavHeader.catalogPageOpen();
-
-        const sortMenu = await $('select[name="sort_by"]');
+        const sortMenu = await this.sortByTable;
         await sortMenu.moveTo();
         await sortMenu.click();
-        
         await sortMenu.waitForDisplayed();
 
+        await expect(sortMenu).visable
+        
     }
 
     async sortByDisplayed () {
