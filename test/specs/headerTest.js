@@ -19,7 +19,7 @@ describe('navigation headers', () => {
  
          });
 
-         it('open auction page', async => () {
+         it('open auction page', async () => {
             await NavHeader.auctionPageOpen();
          });
 });
