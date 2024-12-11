@@ -51,9 +51,9 @@ export const config = {
     //
     capabilities: [{
         browserName: 'chrome',
-        'wdio:chromedriverOptions': { // or 'wdio:geckodriverOptions', 'wdio:edgedriverOptions'
-            binary: '/Users/audreychecketts/code/Capstone/node_modules/chromedriver/bin/chromedriver' // or 'geckodriver', 'msedgedriver'
-        }
+        // 'wdio:chromedriverOptions': { // or 'wdio:geckodriverOptions', 'wdio:edgedriverOptions'
+        //     binary: '/Users/audreychecketts/code/Capstone/node_modules/chromedriver/bin/chromedriver' // or 'geckodriver', 'msedgedriver'
+        // }
     }],
 
     //
