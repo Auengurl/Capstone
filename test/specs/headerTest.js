@@ -24,12 +24,12 @@ describe('navigation headers', () => {
          });
 });
 
-// describe('blog realm buttons', () => {
-//     it('open all blogs using the buttons', async () => {
-//         await BlogCogRealm.clickAllTagsBtns();
+describe('blog realm buttons', () => {
+    it('open all blogs using the buttons', async () => {
+        await BlogCogRealm.clickAllTagsBtns();
 
-//     });
-// });
+    });
+});
 
 describe ('open products pages from drop menu', () => {
     it('open catalog menu', async () => {

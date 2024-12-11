@@ -9,10 +9,6 @@ describe('cart page and components', () => {
         await CartArea.addItemToCart();
     })
 
-
-
-   
-
 })
 
 
