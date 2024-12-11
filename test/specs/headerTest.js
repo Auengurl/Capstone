@@ -54,9 +54,13 @@ describe('sort by function',() => {
     //     await SortBy.sortByFiltersMenu();
     // });
 
-    it('sort by selectors reorganize products accordingly', async () => {
-        await SortBy.sortByDisplayed();
+    it('should validate all sort options', async () => {
+        const sortbyOptions = SortBy.sortByOptions; 
+        for (const option of sortByOptions) {
+            await page.selectSortByOption(await name);
+        }
     });
+    
 });
 
 

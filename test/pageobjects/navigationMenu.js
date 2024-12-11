@@ -106,6 +106,8 @@ class NavHeader extends BasePage{
         await allProducts.waitForDisplayed();
         await allProducts.moveTo();
 
+        await expect(allProducts).toBeDisplayed();
+
     }
 
     async selectProductSubMenuOpenExpectUrl(titleSelector, expectedUrl) {

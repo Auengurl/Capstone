@@ -82,6 +82,7 @@ class CartArea {
         } else {
           console.error('Close button not visible or interactable');
         }
+        // await expect.url('')
       }
 
 
@@ -97,8 +98,12 @@ class CartArea {
         for (const page of pages) {
             try {
                 await page.openNavigationHeaderPage(); 
+
                 await this.cartOpen(); 
-                await this.cartSideBarClose(); 
+                await expect(this.cartOpen).toBeVisible();
+
+                await this.cartSideBarClose();
+                await expect(this.cartOpen).not.toBeVisible()
                 
             } catch (error) {
                 console.error(`Error on ${page.name}:`, error);
@@ -110,10 +115,15 @@ class CartArea {
 
     async addItemToCart () {
         await NavHeader.catalogPageOpen();
+
         await this.productItem.click();
         await expect(browser.url('https://www.dragonsteelbooks.com/collections/all/products/adolin-character-pin-series-2-013'));
+
         await this.addItemCartBtn.click();
+        await expect(this.productItem).toBeDisplayed();
+
         await this.cartOpen();
+        await expect(this.cartOpen).toBeDisplayed();
     }
 
     async removeItemFromSideCart () {
@@ -165,8 +175,6 @@ class CartArea {
     
         const updatedQuantity = await itemInputField.getValue();
         await expect(parseInt(updatedQuantity)).toBe(expectedQuantity);
-
-        await browser.pause(3000);
     }
     
     // async decreaseItemInCart () {
@@ -235,7 +243,7 @@ class CartArea {
 
    async cartPageAddItems () {
         await this.cartPageOpen();
-        await this.decreaseItemInCart();
+        await this.increaseItemInCart();
    }
 
     async checkoutPage () {
@@ -256,8 +264,11 @@ class CartArea {
 
     async shippingPageOpen () {
         await this.cartPageOpen();
+
         await this.shippingPageLink.moveTo();
         await this.shippingPageLink.click();
+
+        await expect(browser.url('https://www.dragonsteelbooks.com/policies/shipping-policy'));
     }
 
     async continueBrowsingReturnsToCatalogPage () {
@@ -267,6 +278,8 @@ class CartArea {
         await this.continueBrowsingBtn.isDisplayed();
         await this.continueBrowsingBtn.click();
         await NavHeader.catalogHeaderLink.waitForExist();
+
+        await expect(browser.url('https://www.dragonsteelbooks.com/collections/all'));
     }
 }
 
