@@ -261,7 +261,7 @@ class CartArea {
     }
 
     async continueBrowsingReturnsToCatalogPage () {
-        await this.addItemToCart();
+        
         await this.removeItemFromSideCart();
 
         await this.continueBrowsingBtn.isDisplayed();
