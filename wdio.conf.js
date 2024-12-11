@@ -50,7 +50,10 @@ export const config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-        browserName: 'chrome'
+        browserName: 'chrome',
+        'wdio:chromedriverOptions': { // or 'wdio:geckodriverOptions', 'wdio:edgedriverOptions'
+            binary: '/Users/audreychecketts/code/Capstone/node_modules/chromedriver/bin/chromedriver' // or 'geckodriver', 'msedgedriver'
+        }
     }],
 
     //

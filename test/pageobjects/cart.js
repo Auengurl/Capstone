@@ -85,7 +85,7 @@ class CartArea {
       }
 
 
-    async cartOpenOnAllPages() {
+    async cartSideMenuOpenOnAllPages() {
 
         const pages = [
             { name: 'Catalog Page', openNavigationHeaderPage: async () => await NavHeader.catalogPageOpen() },
@@ -116,14 +116,14 @@ class CartArea {
         await this.cartOpen();
     }
 
-    async removeItemFromCart () {
+    async removeItemFromSideCart () {
         await this.addItemToCart();
         await this.removeItemCartBtn.waitForClickable({ timeout: 5000 });
         await this.removeItemCartBtn.click();
         await expect(this.emptyCartMessage).toBeDisplayed(); 
     }
 
-    async changeCartItemQuantity (newQuantity) {
+    async changeCartSideMenuItemQuantity (newQuantity) {
         await this.addItemToCart();
         await this.inputNumberBox.click();
         await this.inputNumberBox.setValue(newQuantity);
@@ -262,7 +262,7 @@ class CartArea {
 
     async continueBrowsingReturnsToCatalogPage () {
         await this.addItemToCart();
-        await this.removeItemFromCart();
+        await this.removeItemFromSideCart();
 
         await this.continueBrowsingBtn.isDisplayed();
         await this.continueBrowsingBtn.click();
