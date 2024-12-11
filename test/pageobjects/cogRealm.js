@@ -1,6 +1,5 @@
 
-import { $$ } from '@wdio/globals';
-import { browser } from '@wdio/globals';
+import { $$, browser } from '@wdio/globals';
 import NavHeader from './navigationMenu.js';
 
 class BlogCogRealm {

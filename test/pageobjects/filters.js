@@ -20,6 +20,20 @@ import NavHeader from './navigationMenu';
         ]
     }
 
+    get sortByOptions () {
+        return [
+            { name: "Featured", value: "manual" },
+            { name: "Best Selling", value: "best-selling" },
+            { name: "Alphabetically, A-Z", value: "title-ascending" },
+            { name: "Alphabetically, Z-A", value: "title-descending" },
+            { name: "Price, Low to High", value: "price-ascending" },
+            { name: "Price, High to Low", value: "price-descending" },
+            { name: "Date, New to Old", value: "created-descending" },
+            { name: "Date, Old to New", value: "created-ascending" },
+
+        ];
+    }
+
 
     async sortByFiltersMenu () {
         await NavHeader.catalogPageOpen();
@@ -38,8 +52,8 @@ import NavHeader from './navigationMenu';
         const sortOption = await $(sortSelectorTitle);
 
 
-        await this.sortOption.moveTo();
-        await this.sortOption.click();
+        await sortOption.moveTo();
+        await sortOption.click();
 
         
         await expect(browser).toHaveUrl(expectedUrl);

@@ -93,7 +93,7 @@ class NavHeader extends BasePage{
     }
 
     async auctionPageOpen () {
-        await this.openDragonsteelHomeBasePage(this.auctionPageLink, 'https://www.dragonsteelbooks.com/pages/wind-and-truth-auction')
+        await this.openNavigationHeaderPage(this.auctionPageLink, 'https://www.dragonsteelbooks.com/pages/wind-and-truth-auction')
     }
 
     async subMenuOpen () {
