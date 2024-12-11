@@ -234,6 +234,7 @@ class CartArea {
     async shippingPageOpen () {
         await this.addItemToCart();
 
+        await this.shippingPageLink.scrollIntoView();
         await this.shippingPageLink.moveTo();
         await this.shippingPageLink.click();
 
