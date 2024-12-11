@@ -8,17 +8,6 @@ import NavHeader from './navigationMenu';
         return $('#desktop-SortBy')
     }
 
-    // get sortBySelectors () {
-    //     return [$('option[value="manual"]'),
-    //         $('option[value="best-selling"]'),
-    //         $('option[value="title-ascending"]'),
-    //         $('option[value="title-descending"]'),
-    //         $('option[value="price-ascending"]'),
-    //         $('option[value="price-descending"]'),
-    //         $('option[value="created-ascending"]'),
-    //         $('option[value="created-descending"]')
-    //     ]
-    // }
 
     get sortByOptions () {
         return [
@@ -37,7 +26,7 @@ import NavHeader from './navigationMenu';
 
     async sortByFiltersMenu () {
         await NavHeader.catalogPageOpen();
-        
+
         const sortMenu = await this.sortByTable;
         await sortMenu.moveTo();
         await sortMenu.click();
@@ -47,28 +36,12 @@ import NavHeader from './navigationMenu';
         
     }
     
-    async selectSortByOption(name) {
+    async selectSortByOption(name, value) {
         await this.sortByFiltersMenu();
     
-        // Find the matching sort option from the object array
-        const selectedOption = await this.sortByOptions.find(name);
-    
-        if (!selectedOption) {
-            throw new Error(`Sort option "${name}" is not valid.`);
-        }
-    
-        // Click the sorting option (update the selector logic if necessary)
-        const sortOptionElement = await $(`//li[contains(text(), '${selectedOption.name}')]`);
-        await sortOptionElement.moveTo();
+        const sortOptionElement = await $('option[value="'+value+'"]');
         await sortOptionElement.click();
-    
-        // Wait for the page to update
-        await browser.pause(2000); // Adjust wait logic as necessary
-    
-        // Validate the URL contains the correct sort_by parameter
-        const currentUrl = await browser.getUrl();
-        const expectedUrl = `https://www.dragonsteelbooks.com/collections/all?sort_by=${selectedOption.value}`;
-        expect(currentUrl).toContain(`sort_by=${selectedOption.value}`);
+        await expect(browser.url('`https://www.dragonsteelbooks.com/collections/all?sort_by=${sortOptionElement.value}`;'))
     }
 
 
