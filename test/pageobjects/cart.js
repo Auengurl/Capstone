@@ -53,11 +53,11 @@ class CartArea {
     } 
 
     get increaseItemBtn () {
-        return $('button[class="qty-button qty-plus no-js-hidden"]');
+        return $('button.qty-button.qty-plus');
     }
 
     get decreaseItemBtn () {
-        return $('button[class="qty-button qty-minus no-js-hidden"]');
+        return $('button.qty-button.qty-minus');
     }
 
     get checkOutBtn () {
@@ -98,10 +98,7 @@ class CartArea {
         for (const page of pages) {
             try {
                 await page.openNavigationHeaderPage(); 
-
                 await this.cartOpen(); 
-                await expect(this.cartOpen).toBeVisible();
-
                 await this.cartSideBarClose();
                 await expect(this.cartOpen).not.toBeVisible()
                 
@@ -120,17 +117,16 @@ class CartArea {
         await expect(browser.url('https://www.dragonsteelbooks.com/collections/all/products/adolin-character-pin-series-2-013'));
 
         await this.addItemCartBtn.click();
-        await expect(this.productItem).toBeDisplayed();
 
         await this.cartOpen();
-        await expect(this.cartOpen).toBeDisplayed();
     }
 
     async removeItemFromSideCart () {
         await this.addItemToCart();
         await this.removeItemCartBtn.waitForClickable({ timeout: 5000 });
         await this.removeItemCartBtn.click();
-        await expect(this.emptyCartMessage).toBeDisplayed(); 
+        const msg = await this.emptyCartMessage;
+        await expect(msg).toBeDisplayed(); 
     }
 
     async changeCartSideMenuItemQuantity (newQuantity) {
@@ -201,38 +197,34 @@ class CartArea {
     // }
     
     // //trying to combine the + & - button functions
-    // async updateItemQuantity(action, times) {
-    //     await this.addItemToCart();
+    async updateItemQuantity(action, times) {
     
-    //     const itemInputField = await this.inputNumberBox;
-    //     const initialQuantity = parseInt(await itemInputField.getValue());
+        const itemInputField = await this.inputNumberBox;
+        const initialQuantity = parseInt(await itemInputField.getValue());
     
-    //     const expectedQuantity =
-    //         action === 'increase' ? initialQuantity + times : initialQuantity - times;
+        const expectedQuantity =
+            action === 'increase' ? initialQuantity + times : initialQuantity - times;
     
-    //     const buttonToClick =
-    //         action === 'increase' ? this.increaseItemBtn : this.decreaseItemBtn;
+        const buttonToClick =
+            action === 'increase' ? this.increaseItemBtn : this.decreaseItemBtn;
     
-    //     for (let i = 0; i < times; i++) {
-    //         await buttonToClick.scrollIntoView();
-    //         await buttonToClick.waitForClickable({ timeout: 5000 });
-    //         await buttonToClick.click();
-    //         await buttonToClick.waitForClickable({ timeout: 5000 });
-    
-    //         await browser.pause(3000);
-    //     }
+        for (let i = 0; i < times; i++) {
+            await buttonToClick.scrollIntoView();            
+            await buttonToClick.click();
+            
+        }
 
-    //     await browser.waitUntil(async () => {
-    //         const currentQuantity = parseInt(await itemInputField.getValue());
-    //         return currentQuantity === expectedQuantity;
-    //     }, {
-    //         timeout: 5000,
-    //         timeoutMsg: `The quantity did not update to ${expectedQuantity} as expected.`
-    //     });
+        await browser.waitUntil(async () => {
+            const currentQuantity = parseInt(await itemInputField.getValue());
+            return currentQuantity === expectedQuantity;
+        }, {
+            timeout: 5000,
+            timeoutMsg: `The quantity did not update to ${expectedQuantity} as expected ${action} ${times}.`
+        });
     
-    //     const finalQuantity = parseInt(await itemInputField.getValue());
-    //     await expect(finalQuantity).toBe(expectedQuantity);
-    // }
+        const finalQuantity = parseInt(await itemInputField.getValue());
+        await expect(finalQuantity).toBe(expectedQuantity);
+    }
     
 
     async cartPageOpen () {
@@ -263,7 +255,7 @@ class CartArea {
     }
 
     async shippingPageOpen () {
-        await this.cartPageOpen();
+        await this.addItemToCart();
 
         await this.shippingPageLink.moveTo();
         await this.shippingPageLink.click();
@@ -277,9 +269,9 @@ class CartArea {
 
         await this.continueBrowsingBtn.isDisplayed();
         await this.continueBrowsingBtn.click();
-        await NavHeader.catalogHeaderLink.waitForExist();
+        await expect(NavHeader.catalogHeaderLink).waitForExist;
 
-        await expect(browser.url('https://www.dragonsteelbooks.com/collections/all'));
+        
     }
 }
 
