@@ -82,7 +82,7 @@ class CartArea {
         } else {
           console.error('Close button not visible or interactable');
         }
-        // await expect.url('')
+       
       }
 
 
@@ -99,7 +99,7 @@ class CartArea {
             try {
                 await page.openNavigationHeaderPage(); 
                 await this.cartOpen(); 
-                await this.cartSideBarClose();
+                await this.cartSideBarClose(); 
                 await expect(this.cartOpen).not.toBeVisible()
                 
             } catch (error) {
@@ -173,30 +173,7 @@ class CartArea {
         await expect(parseInt(updatedQuantity)).toBe(expectedQuantity);
     }
     
-    // async decreaseItemInCart () {
-    //     await this.addItemToCart();
 
-    //     const itemInputField = await this.inputNumberBox;
-    //     let initialQuantity = await itemInputField.getValue();
-    //     initialQuantity = parseInt(initialQuantity); 
-    //     const expectedQuantity = initialQuantity - 1;
-    
-    //     await this.decreaseItemBtn.moveTo();
-    //     await this.decreaseItemBtn.click(); 
-
-    //     await browser.waitUntil(async () => {
-    //         const currentQuantity = await itemInputField.getValue();
-    //         return parseInt(currentQuantity) === expectedQuantity;
-    //     }, {
-    //         timeout: 5000, 
-    //         timeoutMsg: `The quantity did not update to ${expectedQuantity} as expected.`
-    //     });
-    
-    //     const updatedQuantity = await itemInputField.getValue();
-    //     await expect(parseInt(updatedQuantity)).toBe(expectedQuantity);
-    // }
-    
-    // //trying to combine the + & - button functions
     async updateItemQuantity(action, times) {
     
         const itemInputField = await this.inputNumberBox;
@@ -212,8 +189,8 @@ class CartArea {
             await buttonToClick.scrollIntoView();            
             await buttonToClick.click();
             
-        }
-
+    }
+    
         await browser.waitUntil(async () => {
             const currentQuantity = parseInt(await itemInputField.getValue());
             return currentQuantity === expectedQuantity;
@@ -225,7 +202,7 @@ class CartArea {
         const finalQuantity = parseInt(await itemInputField.getValue());
         await expect(finalQuantity).toBe(expectedQuantity);
     }
-    
+
 
     async cartPageOpen () {
         await this.addItemToCart();
