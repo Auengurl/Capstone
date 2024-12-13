@@ -19,9 +19,7 @@ describe('navigation headers', () => {
  
          });
 
-         it('open auction page', async () => {
-            await NavHeader.auctionPageOpen();
-         });
+    
 });
 
 describe('blog realm buttons', () => {
@@ -64,10 +62,3 @@ describe('sort by function',() => {
     });
     
 });
-
-
-
- 
-
-
-
