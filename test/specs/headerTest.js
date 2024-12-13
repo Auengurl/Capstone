@@ -5,7 +5,8 @@ import SortBy from "../pageobjects/filters.js";
 
 
 describe('navigation headers', () => {
-        it('open home page', async () => {
+          
+        it('open home header page', async () => {
            await NavHeader.homePageOpen();
 
         });

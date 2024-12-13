@@ -1,6 +1,4 @@
-import { $, browser } from '@wdio/globals';
 import BasePage from './basePage';
-
 
 class NavHeader extends BasePage{
 
@@ -75,7 +73,7 @@ class NavHeader extends BasePage{
     }
 
 
-
+    
     
     async homePageOpen () {
         await this.openNavigationHeaderPage(this.homeHeaderLink, 'https://www.dragonsteelbooks.com/');

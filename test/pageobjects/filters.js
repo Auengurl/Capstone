@@ -1,4 +1,3 @@
-import { $, browser } from '@wdio/globals';
 import BasePage from './basePage';
 import NavHeader from './navigationMenu';
 
@@ -9,8 +8,8 @@ import NavHeader from './navigationMenu';
     }
 
 
-    get sortByOptions () {
-        return [
+   sortByOptions () {
+         [
             { name: "Featured", value: "manual" },
             { name: "Best Selling", value: "best-selling" },
             { name: "Alphabetically, A-Z", value: "title-ascending" },
