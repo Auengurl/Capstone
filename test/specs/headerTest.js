@@ -53,7 +53,7 @@ describe('sort by function',() => {
         await SortBy.sortByFiltersMenu();
     });
 
-    it('should validate all sort options', async () => {
+    it.only('should validate all sort options', async () => {
         const sortByOptions = SortBy.sortByOptions; 
         
         for (const option of sortByOptions) {
