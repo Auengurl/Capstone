@@ -8,7 +8,7 @@ import NavHeader from './navigationMenu';
     }
 
 
-   sortByOptions () {
+   sortByOptions =
          [
             { name: "Featured", value: "manual" },
             { name: "Best Selling", value: "best-selling" },
@@ -20,7 +20,7 @@ import NavHeader from './navigationMenu';
             { name: "Date, Old to New", value: "created-ascending" },
 
         ];
-    }
+    
 
 
     async sortByFiltersMenu () {
