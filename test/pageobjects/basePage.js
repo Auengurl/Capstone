@@ -13,7 +13,8 @@ export default class BasePage {
     async openNavigationHeaderPage(headerLink, expectedUrl) {
         await this.openDragonsteelHomeBasePage(); 
         await headerLink.click();  
-        await expect(browser).toHaveUrl(expectedUrl); 
+        await expect(browser).toHaveUrl(expectedUrl);
+        await expect(await this.selectorDetector).toBeDisplayed(); 
     }
 
 
