@@ -9,7 +9,7 @@ export default class SideCartSelectors {
     }
 
     get cartPageBtn () {
-        return $('a[href="/cart"]');
+        return $('a[id="ViewCart"]');
     }
 
     get continueBrowsingBtn () {
@@ -53,11 +53,11 @@ export default class SideCartSelectors {
     }
 
     get decreaseItemBtn () {
-        return $('button[aria-label="Decrease quantity"]');
+        return $('button.qty-button.qty-minus[role="button"]');
     }
 
     get checkOutBtn () {
-        return $('button[name="checkout"]');
+        return $('button[id="CheckOut"]');
     }
 
     get shippingPageLink () {

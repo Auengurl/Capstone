@@ -22,44 +22,24 @@ describe('Cart functionality tests', () => {
         })
     })
 
+    describe('side cart view whole cart page button', async () => {
+        it('should be able to view whole cart page using View Cart button from side menu', async () => {
+            await browser.refresh();
+            await SideCartFunctions.cartPageOpen();
+        })
+    })
+
     describe('adding items to side cart', async () => {
         it('add item to side cart shows in cart', async () => {   
             await SideCartFunctions.addItemToCart();
         }) 
         it('add one more item using + button', async () => {   
+            await SideCartFunctions.removeItemFromSideCart();
             await SideCartFunctions.increaseItemInCart();
         })
         it('add multiple items by typing in a number to the chart to see if the icon changes', async () => {
             await SideCartFunctions.changeCartSideMenuItemQuantity(15);
         })
-
-        
-
-        it('add multiple of item to cart using the + button, and decrease item using the - button', async () => {
-            await SideCartFunctions.changeCartSideMenuItemQuantity(5);
-            await SideCartFunctions.updateItemQuantity('increase', 3);
-        });   
-    })
-
-    describe('side cart button checkout shipping page', async () => {
-        it('checkout page accessible from side cart menu', async () => {
-            await SideCartFunctions.checkOutFromSideCartMenu();
-        })
-    })
-        
-    describe('side cart page open button', async () => {
-        it('should be able to view whole cart page using View Cart button from side menu', async () => {
-            await SideCartFunctions.cartPageOpen();
-        })
-    })
-    
-    describe('side cart continue browsing', async () => {
-        it('continue browsing button should work if open cart menu', async () => {
-            await SideCartFunctions.continueBrowsingReturnsToCatalogPage();
-        })
-    })
-    
-
 
     describe('decrease items in side cart menu', async () => {
         it('change item in cart amount, and decrease item using the - button', async () => {
@@ -67,5 +47,23 @@ describe('Cart functionality tests', () => {
             await SideCartFunctions.updateItemQuantity('decrease', 3);
         })
     })
+        
+        it('add multiple of item to cart using the + button, and decrease item using the - button', async () => {
+            await SideCartFunctions.changeCartSideMenuItemQuantity(5);
+            await SideCartFunctions.updateItemQuantity('increase', 3);
+        });   
+    })
 
+    describe('side cart checkout page', async () => {
+        it('checkout page accessible from side cart menu', async () => {
+            await SideCartFunctions.checkOutFromSideCartMenu();
+        })
+    })
+    
+    describe('side cart continue browsing', async () => {
+        it('continue browsing button should work if open cart menu', async () => {
+            await browser.refresh();
+            await SideCartFunctions.continueBrowsingReturnsToCatalogPage();
+        })
+    })
 })

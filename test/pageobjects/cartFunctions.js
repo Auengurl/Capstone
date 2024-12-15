@@ -6,14 +6,26 @@ class SideCartFunctions extends SideCartSelectors {
     async mouseMoveItClickIt (element) {
         await element.waitForClickable({ timeout: 5000 });
         await element.scrollIntoView();
+        await browser.pause(1000);
+        await element.moveTo();
+        await element.click();
+        
+    }
+
+    async mouseNoScrollJustMoveAndClickIt (element) {
+        // await element.waitForClickable({ timeout: 5000 });
         await element.moveTo();
         await element.click();
     }
 
-    async mouseNoScrollJustMoveAndClickIt (element) {
-        await element.waitForClickable({ timeout: 5000 });
-        await element.moveTo();
-        await element.click();
+    async skipSideCartAdditionalContent () {
+        await browser.execute(() => {
+            const recommendations = document.getElementById('cart-recommendations');
+            if (recommendations) {
+                recommendations.style.display = 'none';
+            }
+        });
+        await $('#effectiveAppsCDTContainer').waitForExist();
     }
     
     
@@ -106,10 +118,10 @@ class SideCartFunctions extends SideCartSelectors {
                 recommendations.style.display = 'none';
             }
         }); 
-
+        await browser.saveScreenshot('./screenshots/full-page.png');
         await this.mouseNoScrollJustMoveAndClickIt(this.increaseItemBtn);
         await browser.pause(1000);
-        
+        await browser.saveScreenshot('./screenshots/full-page-after.png');
     
         await browser.waitUntil(async () => {
             const currentQuantity = await itemInputField.getValue();
@@ -135,6 +147,7 @@ class SideCartFunctions extends SideCartSelectors {
             action === 'increase' ? this.increaseItemBtn : this.decreaseItemBtn;
     
         for (let i = 0; i < times; i++) {
+            await this.skipSideCartAdditionalContent();
             await buttonToClick.scrollIntoView();            
             await buttonToClick.click();
     }
@@ -154,6 +167,7 @@ class SideCartFunctions extends SideCartSelectors {
     async cartPageOpen() {
         await this.addItemToCart();
         await browser.waitUntil(async () => parseInt(await this.cartCount.getText()) > 0);
+        // await this.skipSideCartAdditionalContent();
         await this.mouseMoveItClickIt(this.cartPageBtn);
         await expect(browser.waitUntil(async () => (await browser.getUrl()).includes('/cart')));
     }
@@ -164,7 +178,7 @@ class SideCartFunctions extends SideCartSelectors {
    }
 
     async checkoutPage () {
-
+        await this.skipSideCartAdditionalContent();
         await this.mouseMoveItClickIt(this.checkOutBtn);
 
         await expect(browser.url('https://www.dragonsteelbooks.com/checkout/'));
