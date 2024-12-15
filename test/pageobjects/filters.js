@@ -1,6 +1,5 @@
 import BasePage from './basePage';
 import NavHeader from './navigationMenu';
-
  class SortBy extends BasePage{
 
     get sortByTable () {

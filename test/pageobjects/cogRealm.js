@@ -1,5 +1,4 @@
 import NavHeader from './navigationMenu.js';
-
 class BlogCogRealm {
 
     get allTagBtns() {

@@ -1,8 +1,58 @@
-import NavHeader from '../pageobjects/navigationMenu';
+import NavHeader from './navigationMenu';
+import SideCartSelectors from './cartSelectors';
 
-class CartPart2 extends CartArea {
+class SideCartFunctions extends SideCartSelectors {
+    
+    async mouseMoveItClickIt (element) {
+        await element.waitForClickable({ timeout: 5000 });
+        await element.scrollIntoView();
+        await element.moveTo();
+        await element.click();
+    }
 
+    async mouseNoScrollJustMoveAndClickIt (element) {
+        await element.waitForClickable({ timeout: 5000 });
+        await element.moveTo();
+        await element.click();
+    }
+    
+    
+    async cartOpen () {
+        await this.cartIconBtn.click();
+        await expect(this.cartSidebarMenu);
+    }
 
+    async cartSideBarClose() {
+        if (await this.closeShoppingSideBarBtn.isDisplayed()) {
+            await this.mouseMoveItClickIt(this.closeShoppingSideBarBtn);
+        } 
+        else {
+          console.error('Close button not visible or interactable');
+        }
+    }
+
+    async cartSideMenuOpenOnAllPages() {
+
+        const pages = [
+            { name: 'Catalog Page', openNavigationHeaderPage: async () => await NavHeader.catalogPageOpen() },
+            { name: 'Home Page', openNavigationHeaderPage: async () => await NavHeader.homePageOpen() },
+            { name: 'The Cognitive Realm Page', openNavigationHeaderPage: async () => await NavHeader.realmCogPageOpen() },
+        ];
+
+        for (const page of pages) {
+            try {
+                await page.openNavigationHeaderPage(); 
+                await this.cartOpen(); 
+                await this.cartSideBarClose(); 
+                await expect(this.cartOpen).not.toBeVisible()
+                
+            } catch (error) {
+                console.error(`Error on ${page.name}:`, error);
+            }
+    
+        }
+    }
+    
     async addItemToCart () {
         await NavHeader.catalogPageOpen();
 
@@ -16,8 +66,8 @@ class CartPart2 extends CartArea {
 
     async removeItemFromSideCart () {
         await this.addItemToCart();
-        await this.removeItemCartBtn.waitForClickable({ timeout: 5000 });
-        await this.removeItemCartBtn.click();
+        await browser.pause(1000); //Tried the wait for unable to work witout the pause
+        await this.mouseMoveItClickIt(this.removeItemCartBtn);
         const msg = await this.emptyCartMessage;
         await expect(msg).toBeDisplayed(); 
     }
@@ -42,7 +92,6 @@ class CartPart2 extends CartArea {
         await expect(parseInt(cartCountText)).toBe(parseInt(newQuantity));
     }
 
-   
     async increaseItemInCart() {
         await this.addItemToCart();
     
@@ -50,11 +99,17 @@ class CartPart2 extends CartArea {
         let initialQuantity = await itemInputField.getValue();
         initialQuantity = parseInt(initialQuantity); 
         const expectedQuantity = initialQuantity + 1;
+
+        await browser.execute(() => {
+            const recommendations = document.getElementById('cart-recommendations');
+            if (recommendations) {
+                recommendations.style.display = 'none';
+            }
+        }); 
+
+        await this.mouseNoScrollJustMoveAndClickIt(this.increaseItemBtn);
+        await browser.pause(1000);
         
-        await this.increaseItemBtn.waitForDisplayed({ timeout: 5000 });
-        
-        await this.increaseItemBtn.moveTo();
-        await this.increaseItemBtn.click();
     
         await browser.waitUntil(async () => {
             const currentQuantity = await itemInputField.getValue();
@@ -68,7 +123,6 @@ class CartPart2 extends CartArea {
         await expect(parseInt(updatedQuantity)).toBe(expectedQuantity);
     }
     
-
     async updateItemQuantity(action, times) {
     
         const itemInputField = await this.inputNumberBox;
@@ -83,7 +137,6 @@ class CartPart2 extends CartArea {
         for (let i = 0; i < times; i++) {
             await buttonToClick.scrollIntoView();            
             await buttonToClick.click();
-            
     }
     
         await browser.waitUntil(async () => {
@@ -98,11 +151,11 @@ class CartPart2 extends CartArea {
         await expect(finalQuantity).toBe(expectedQuantity);
     }
 
-
-    async cartPageOpen () {
+    async cartPageOpen() {
         await this.addItemToCart();
-        await this.cartPageBtn.click();
-        await expect(browser.url('https://www.dragonsteelbooks.com/cart'));
+        await browser.waitUntil(async () => parseInt(await this.cartCount.getText()) > 0);
+        await this.mouseMoveItClickIt(this.cartPageBtn);
+        await expect(browser.waitUntil(async () => (await browser.getUrl()).includes('/cart')));
     }
 
    async cartPageAddItems () {
@@ -111,11 +164,10 @@ class CartPart2 extends CartArea {
    }
 
     async checkoutPage () {
-        
-        await this.checkOutBtn.scrollIntoView();
-        await this.checkOutBtn.moveTo();
-        await this.checkOutBtn.click();
-        await expect(browser.url('https://www.dragonsteelbooks.com/checkout/'))
+
+        await this.mouseMoveItClickIt(this.checkOutBtn);
+
+        await expect(browser.url('https://www.dragonsteelbooks.com/checkout/'));
     }
 
     async checkOutFromCartPage () {
@@ -130,26 +182,20 @@ class CartPart2 extends CartArea {
 
     async shippingPageOpen () {
         await this.addItemToCart();
-
-        await this.shippingPageLink.scrollIntoView();
-        await this.shippingPageLink.moveTo();
-        await this.shippingPageLink.click();
-
+        // Pause required because of Webdrivrer bug: https://github.com/webdriverio/webdriverio/issues/13789
+        await browser.pause(1000);
+        await this.mouseMoveItClickIt(this.shippingPageLink);
         await expect(browser.url('https://www.dragonsteelbooks.com/policies/shipping-policy'));
     }
 
     async continueBrowsingReturnsToCatalogPage () {
-        
         await this.removeItemFromSideCart();
+        await browser.pause(1000);
 
-        await this.continueBrowsingBtn.waitForDisplayed({ timeout: 5000 });
-        await this.continueBrowsingBtn.scrollIntoView();
-        await this.continueBrowsingBtn.isDisplayed();
-        await this.continueBrowsingBtn.click();
+        await this.mouseMoveItClickIt(this.continueBrowsingBtn);
+
         await expect(NavHeader.catalogHeaderLink).waitForExist;
-
-        
     }
 }
 
-export default new CartPart2();
+export default new SideCartFunctions();
