@@ -19,8 +19,8 @@ class NavHeader extends BasePage{
     }
 
     
-    get menuItems () {
-        return [
+    menuItems =
+        [
             {
                 title: 'a[title="LEATHERBOUND BOOKS"]', 
                 expectedUrl: 'https://www.dragonsteelbooks.com/collections/leatherbound-books'
@@ -70,11 +70,7 @@ class NavHeader extends BasePage{
                 expectedUrl: 'https://www.dragonsteelbooks.com/collections/external_vendors'
             }
         ];
-    }
 
-
-    
-    
     async homePageOpen () {
         await this.openNavigationHeaderPage(this.homeHeaderLink, 'https://www.dragonsteelbooks.com/');
     }
@@ -87,8 +83,6 @@ class NavHeader extends BasePage{
         await this.openNavigationHeaderPage(this.realmCogHeaderLink, 'https://www.dragonsteelbooks.com/blogs/the-cognitive-realm');
     }
 
-   
-
     async subMenuOpen () {
         await this.openDragonsteelHomeBasePage();
 
@@ -100,7 +94,6 @@ class NavHeader extends BasePage{
         await allProducts.moveTo();
 
         await expect(allProducts).toBeDisplayed();
-
     }
 
     async selectProductSubMenuOpenExpectUrl(titleSelector, expectedUrl) {
@@ -112,8 +105,6 @@ class NavHeader extends BasePage{
         
         await expect(browser).toHaveUrl(expectedUrl);
     }
-
-    
 }
 
 export default new NavHeader();

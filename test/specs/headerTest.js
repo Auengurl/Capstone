@@ -8,7 +8,6 @@ describe('navigation headers', () => {
           
         it('open home header page', async () => {
            await NavHeader.homePageOpen();
-
         });
 
         it('open catalog page', async () => {
@@ -17,7 +16,6 @@ describe('navigation headers', () => {
 
         it('open realm blog page', async () => {
             await NavHeader.realmCogPageOpen();
- 
          });
 
     
@@ -26,7 +24,6 @@ describe('navigation headers', () => {
 describe('blog realm buttons', () => {
     it('open all blogs using the buttons', async () => {
         await BlogCogRealm.clickAllTagsBtns();
-
     });
 });
 
@@ -41,7 +38,6 @@ describe ('open products pages from drop menu', () => {
         for (const item of menuItems) {
             const { title, expectedUrl } = item; 
             await NavHeader.selectProductSubMenuOpenExpectUrl(await title, expectedUrl);
-            
         }
     });
 });
