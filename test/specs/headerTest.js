@@ -17,8 +17,6 @@ describe('navigation headers', () => {
         it('open realm blog page', async () => {
             await NavHeader.realmCogPageOpen();
          });
-
-    
 });
 
 describe('blog realm buttons', () => {
