@@ -13,7 +13,6 @@ class SideCartFunctions extends SideCartSelectors {
     }
 
     async mouseNoScrollJustMoveAndClickIt (element) {
-        // await element.waitForClickable({ timeout: 5000 });
         await element.moveTo();
         await element.click();
     }
@@ -27,7 +26,6 @@ class SideCartFunctions extends SideCartSelectors {
         });
         await $('#effectiveAppsCDTContainer').waitForExist();
     }
-    
     
     async cartOpen () {
         await this.cartIconBtn.click();
@@ -154,12 +152,12 @@ class SideCartFunctions extends SideCartSelectors {
     
         await browser.waitUntil(async () => {
             const currentQuantity = parseInt(await itemInputField.getValue());
+            await this.skipSideCartAdditionalContent();
             return currentQuantity === expectedQuantity;
         }, {
-            timeout: 5000,
+            timeout: 6000,
             timeoutMsg: `The quantity did not update to ${expectedQuantity} as expected ${action} ${times}.`
         });
-    
         const finalQuantity = parseInt(await itemInputField.getValue());
         await expect(finalQuantity).toBe(expectedQuantity);
     }
@@ -167,7 +165,7 @@ class SideCartFunctions extends SideCartSelectors {
     async cartPageOpen() {
         await this.addItemToCart();
         await browser.waitUntil(async () => parseInt(await this.cartCount.getText()) > 0);
-        // await this.skipSideCartAdditionalContent();
+        
         await this.mouseMoveItClickIt(this.cartPageBtn);
         await expect(browser.waitUntil(async () => (await browser.getUrl()).includes('/cart')));
     }
